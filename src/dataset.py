@@ -53,8 +53,8 @@ class Caption:
         raise NotImplementedError
     def get_id(self):
         filename = self._fpath.split("/")[-1]
-        id = filename.split(".")[0]
-        return id
+        caption_id = filename.split(".")[0]
+        return caption_id
     def get_data(self):
         return self._data
     def __read_raw_text(self):
