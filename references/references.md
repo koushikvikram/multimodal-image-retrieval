@@ -19,3 +19,5 @@
 [Automate Python Testing With GitHub Actions](https://medium.com/swlh/automate-python-testing-with-github-actions-7926b5d8a865)
 
 [Automate Tests With GitHub Actions for Python](https://blog.deepjyoti30.dev/tests-github-python)
+
+[Continuous Integration for your data with GitHub Actions and Great Expectations](https://greatexpectations.io/blog/github-actions/)
