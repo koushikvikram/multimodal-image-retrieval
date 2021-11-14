@@ -1,5 +1,5 @@
 '''Module for creating and working with the InstaNY100K dataset'''
-from typing import List, Dict
+from typing import List
 import glob
 import re
 
@@ -14,21 +14,24 @@ class Dataset:
     def __init__(self, captions_path: str, images_path: str):
         self.captions_path = captions_path
         self.images_path = images_path
-        self.captions_dataset = dict()
+        self.captions_dataset = {}
     def read_captions(self, clean=False):
         '''read all caption files'''
         filepaths = glob.glob(self.captions_path+"*.txt")
         all_captions = {}
         for path in filepaths:
-            c = Caption(path)
-            c.read(clean=clean)
-            caption_id = c.get_id()
-            words = c.get_data()
+            caption = Caption(path)
+            caption.read(clean=clean)
+            caption_id = caption.get_id()
+            words = caption.get_data()
             all_captions[caption_id] = words
-        return all_captions
+        self.__set_captions(all_captions)
+    def get_caption_embeddings(self):
+        '''get a single vector representation from word2vec for each caption'''
+        raise NotImplementedError
     def __set_captions(self, captions):
         '''set self.captions_dataset to captions'''
-        raise NotImplementedError
+        self.captions_dataset = captions
 
 
 class Caption:
