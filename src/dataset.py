@@ -61,7 +61,7 @@ class Caption:
     def get_data(self):
         return self._data
     def __read_raw_text(self):
-        with open(self._fpath, 'r') as file:
+        with open(self._fpath, 'r', encoding=None) as file:
             text = file.read()
         return text
     def __set_data(self, data: List[str]):
