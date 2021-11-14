@@ -1,4 +1,5 @@
 '''Module for creating and working with the InstaNY100K dataset'''
+from os import stat
 from typing import List
 import glob
 import re
@@ -43,9 +44,10 @@ class Caption:
     def read(self, clean=False):
         '''read textfile and make words from captions'''
         text = self.__read_raw_text()
-        words = self.__clean(text) if clean else text.split(" ")
+        words = self.clean_text(text) if clean else text.split(" ")
         self.__set_data(words)
-    def __clean(self, text):
+    @staticmethod
+    def clean_text(self, text):
         '''return clean words
         keep ascii alphanum and remove stop words'''
         # remove non-ascii characters
