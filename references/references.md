@@ -7,3 +7,5 @@
 [Streamlit Cloud](https://streamlit.io/cloud)
 
 [Creating a Streamlit web app, building with Docker + GitHub Actions, and hosting on Heroku](https://joshuacook.netlify.app/post/streamlit-app-heroku/)
+
+[Run your Python Unit Tests with GitHub Actions](https://www.techiediaries.com/python-unit-tests-github-actions/)
