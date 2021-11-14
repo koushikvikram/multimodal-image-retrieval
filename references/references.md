@@ -13,3 +13,5 @@
 [How to resolve "refusing to allow an OAuth App to create or update workflow" on git push](https://stackoverflow.com/questions/64059610/how-to-resolve-refusing-to-allow-an-oauth-app-to-create-or-update-workflow-on)
 
 [pylint action is broken #636](https://github.com/actions/starter-workflows/issues/636)
+
+[Python project for generating badges for your projects](https://github.com/jongracecox/anybadge)
