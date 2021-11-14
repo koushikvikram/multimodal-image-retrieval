@@ -9,8 +9,8 @@ nltk.download('punkt')
 
 class Dataset:
     def __init__(self, captions_path: str, images_path: str):
-        self.CAPTIONS_PATH = captions_path
-        self.IMAGES_PATH = images_path
+        self.captions_path = captions_path
+        self.images_path = images_path
     def read_dataset(self):
         raise NotImplementedError
     def clean_dataset(self):
@@ -20,7 +20,8 @@ class Dataset:
 class Caption:
     def __init__(self, filepath: str):
         self._fpath = filepath
-        self._data = self.read()
+        self._data = []
+        self.read()
         self._id = self.get_id()
     def read(self):
         raw_text = self.__read_raw_text()
@@ -31,7 +32,7 @@ class Caption:
         # remove non-ascii characters
         ascii_text = text.encode("ascii", "ignore").decode()
         # remove non-alphanumeric characters
-        pattern = re.compile('[^a-zA-Z\d\s]')
+        pattern = re.compile(r'[^a-zA-Z\d\s]')
         alnum_text = pattern.sub('', ascii_text)
         # lowercase the text
         lowercase_text = alnum_text.lower()
@@ -40,7 +41,9 @@ class Caption:
         # word tokenize
         cleaned_words = word_tokenize(no_stop_words)
         # remove custom stopwords
-        custom_stopwords = ['http', 'https', 'photo', 'picture', 'image', 'insta', 'instagram', 'post']
+        custom_stopwords = [
+            'http', 'https', 'photo', 'picture', 
+            'image', 'insta', 'instagram', 'post']
         clean_captions = []
         for word in cleaned_words:
             if word not in custom_stopwords:
