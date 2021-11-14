@@ -1,3 +1,4 @@
+'''Module for creating and working with the InstaNY100K dataset'''
 from typing import List
 import re
 
@@ -8,6 +9,7 @@ from nltk.tokenize import word_tokenize
 nltk.download('punkt')
 
 class Dataset:
+    '''Perform overall Dataset operations'''
     def __init__(self, captions_path: str, images_path: str):
         self.captions_path = captions_path
         self.images_path = images_path
@@ -18,6 +20,7 @@ class Dataset:
 
 
 class Caption:
+    '''Perform operations on individual caption textfiles'''
     def __init__(self, filepath: str):
         self._fpath = filepath
         self._data = []
