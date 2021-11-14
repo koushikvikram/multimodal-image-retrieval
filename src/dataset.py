@@ -42,7 +42,7 @@ class Caption:
         cleaned_words = word_tokenize(no_stop_words)
         # remove custom stopwords
         custom_stopwords = [
-            'http', 'https', 'photo', 'picture', 
+            'http', 'https', 'photo', 'picture',
             'image', 'insta', 'instagram', 'post']
         clean_captions = []
         for word in cleaned_words:
