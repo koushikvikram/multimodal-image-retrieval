@@ -68,7 +68,7 @@ class Caption:
         '''returns list of words'''
         return self._data
     def __read_raw_text(self):
-        '''internal function: read txt file as str'''
+        '''read txt file as string'''
         with open(self._fpath, 'r', encoding='utf-8') as file:
             text = file.read()
         return text
