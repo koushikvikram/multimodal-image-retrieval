@@ -15,3 +15,7 @@
 [pylint action is broken #636](https://github.com/actions/starter-workflows/issues/636)
 
 [Python project for generating badges for your projects](https://github.com/jongracecox/anybadge)
+
+[Automate Python Testing With GitHub Actions](https://medium.com/swlh/automate-python-testing-with-github-actions-7926b5d8a865)
+
+[Automate Tests With GitHub Actions for Python](https://blog.deepjyoti30.dev/tests-github-python)
