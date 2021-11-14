@@ -43,32 +43,30 @@ class Caption:
     def read(self, clean=False):
         '''read textfile and make words from captions'''
         text = self.__read_raw_text()
-        words = clean_text(text) if clean else text.split(" ")
-        self.__set_data(words)
-    @staticmethod
-    def clean_text(text):
-        '''return clean words
-        keep ascii alphanum and remove stop words'''
-        # remove non-ascii characters
-        ascii_text = text.encode("ascii", "ignore").decode()
-        # remove non-alphanumeric characters
-        pattern = re.compile(r'[^a-zA-Z\d\s]')
-        alnum_text = pattern.sub('', ascii_text)
-        # lowercase the text
-        lowercase_text = alnum_text.lower()
-        # remove stop words
-        no_stop_words = remove_stopwords(lowercase_text)
-        # word tokenize
-        cleaned_words = word_tokenize(no_stop_words)
-        # remove custom stopwords
-        custom_stopwords = [
-            'http', 'https', 'photo', 'picture',
-            'image', 'insta', 'instagram', 'post']
-        clean_captions = []
-        for word in cleaned_words:
-            if word not in custom_stopwords:
-                clean_captions.append(word)
-        return clean_captions
+        if clean:
+            # remove non-ascii characters
+            ascii_text = text.encode("ascii", "ignore").decode()
+            # remove non-alphanumeric characters
+            pattern = re.compile(r'[^a-zA-Z\d\s]')
+            alnum_text = pattern.sub('', ascii_text)
+            # lowercase the text
+            lowercase_text = alnum_text.lower()
+            # remove stop words
+            no_stop_words = remove_stopwords(lowercase_text)
+            # word tokenize
+            cleaned_words = word_tokenize(no_stop_words)
+            # remove custom stopwords
+            custom_stopwords = [
+                'http', 'https', 'photo', 'picture',
+                'image', 'insta', 'instagram', 'post']
+            clean_captions = []
+            for word in cleaned_words:
+                if word not in custom_stopwords:
+                    clean_captions.append(word)
+            self.__set_data(clean_captions)
+        else:
+            words = text.split(" ")
+            self.__set_data(words)
     def get_embeddings(self):
         '''get word2vec embeddings of caption'''
         raise NotImplementedError
