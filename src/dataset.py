@@ -1,5 +1,6 @@
 '''Module for creating and working with the InstaNY100K dataset'''
-from typing import List
+from typing import List, Dict
+import glob
 import re
 
 import nltk
@@ -13,11 +14,20 @@ class Dataset:
     def __init__(self, captions_path: str, images_path: str):
         self.captions_path = captions_path
         self.images_path = images_path
-    def read_dataset(self):
-        '''read the entire dataset'''
-        raise NotImplementedError
-    def clean_dataset(self):
-        '''clean the entire dataset'''
+        self.captions_dataset = dict()
+    def read_captions(self, clean=False):
+        '''read all caption files'''
+        filepaths = glob.glob(self.captions_path+"*.txt")
+        all_captions = {}
+        for path in filepaths:
+            c = Caption(path)
+            c.read(clean=clean)
+            caption_id = c.get_id()
+            words = c.get_data()
+            all_captions[caption_id] = words
+        return all_captions
+    def __set_captions(self, captions):
+        '''set self.captions_dataset to captions'''
         raise NotImplementedError
 
 
@@ -26,16 +36,15 @@ class Caption:
     def __init__(self, filepath: str):
         self._fpath = filepath
         self._data = []
-        self.read()
         self._id = self.get_id()
-    def read(self):
+    def read(self, clean=False):
         '''read textfile and make words from captions'''
-        raw_text = self.__read_raw_text()
-        words = raw_text.split(" ")
-        self.__set_data(words)
-    def clean(self):
-        '''keep ascii alphanum and remove stop words'''
         text = self.__read_raw_text()
+        words = self.__clean(text) if clean else text.split(" ")
+        self.__set_data(words)
+    def __clean(self, text):
+        '''return clean words
+        keep ascii alphanum and remove stop words'''
         # remove non-ascii characters
         ascii_text = text.encode("ascii", "ignore").decode()
         # remove non-alphanumeric characters
@@ -55,7 +64,7 @@ class Caption:
         for word in cleaned_words:
             if word not in custom_stopwords:
                 clean_captions.append(word)
-        self.__set_data(clean_captions)
+        return clean_captions
     def get_embeddings(self):
         '''get word2vec embeddings of caption'''
         raise NotImplementedError
