@@ -14,8 +14,10 @@ class Dataset:
         self.captions_path = captions_path
         self.images_path = images_path
     def read_dataset(self):
+        '''read the entire dataset'''
         raise NotImplementedError
     def clean_dataset(self):
+        '''clean the entire dataset'''
         raise NotImplementedError
 
 
@@ -27,10 +29,12 @@ class Caption:
         self.read()
         self._id = self.get_id()
     def read(self):
+        '''read textfile and make words from captions'''
         raw_text = self.__read_raw_text()
         words = raw_text.split(" ")
         self.__set_data(words)
     def clean(self):
+        '''keep ascii alphanum and remove stop words'''
         text = self.__read_raw_text()
         # remove non-ascii characters
         ascii_text = text.encode("ascii", "ignore").decode()
@@ -53,16 +57,21 @@ class Caption:
                 clean_captions.append(word)
         self.__set_data(clean_captions)
     def get_embeddings(self):
+        '''get word2vec embeddings of caption'''
         raise NotImplementedError
     def get_id(self):
+        '''get caption's ID, present in filename'''
         filename = self._fpath.split("/")[-1]
         caption_id = filename.split(".")[0]
         return caption_id
     def get_data(self):
+        '''returns list of words'''
         return self._data
     def __read_raw_text(self):
+        '''internal function: read txt file as str'''
         with open(self._fpath, 'r', encoding='utf-8') as file:
             text = file.read()
         return text
     def __set_data(self, data: List[str]):
+        '''assign list of words to method's _data variable'''
         self._data = data
