@@ -11,3 +11,5 @@
 [Run your Python Unit Tests with GitHub Actions](https://www.techiediaries.com/python-unit-tests-github-actions/)
 
 [How to resolve "refusing to allow an OAuth App to create or update workflow" on git push](https://stackoverflow.com/questions/64059610/how-to-resolve-refusing-to-allow-an-oauth-app-to-create-or-update-workflow-on)
+
+[pylint action is broken #636](https://github.com/actions/starter-workflows/issues/636)
