@@ -3,10 +3,10 @@ from gensim.models import Word2Vec
 import config.word2vec as cfg
 
 
-ALL_CLEANED_CAPTIONS = None
+WORD2VEC_DATASET = None
 
 model = Word2Vec(
-    ALL_CLEANED_CAPTIONS,
+    WORD2VEC_DATASET,
     size=cfg.SIZE,
     min_count=cfg.MIN_COUNT,
     workers=cfg.N_CORES,
