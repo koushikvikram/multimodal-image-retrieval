@@ -47,7 +47,7 @@ class Dataset:
         word_counts = Counter(all_words)
         # make a new list and store captions with words having a count>=5
         all_captions = []
-        print("Getting high-frequency captions")
+        print("Getting High-Frequency Captions ...")
         for caption in tqdm(captions.values()):
             high_freq_words = []
             for word in caption:
