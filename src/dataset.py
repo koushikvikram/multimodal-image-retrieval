@@ -33,6 +33,10 @@ class Dataset:
     def get_word2vec_dataset(self, min_count=5):
         '''make captions dataset for training word2vec'''
         # get all captions
+        captions = self.get_captions()
+        if len(captions) == 0:
+            self.read_captions(clean=True)
+        captions = self.get_captions()
         # get all words from the captions
         # get counts for each word
         # make a new list and store captions with words having a count>=5
