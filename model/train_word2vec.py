@@ -9,10 +9,10 @@ N_CORES = 8
 EPOCHS = 10
 WINDOW = 8
 
-model = gensim.models.Word2Vec(
-    ALL_CLEANED_CAPTIONS, 
-    size=SIZE, min_count=MIN_COUNT, 
-    workers=N_CORES, 
-    iter=EPOCHS, 
+model = Word2Vec(
+    ALL_CLEANED_CAPTIONS,
+    size=SIZE, min_count=MIN_COUNT,
+    workers=N_CORES,
+    iter=EPOCHS,
     window=WINDOW)
 model.save("word2vec_instacities.model")
