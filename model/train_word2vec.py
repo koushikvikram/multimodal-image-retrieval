@@ -3,6 +3,16 @@ from gensim.models import Word2Vec
 
 
 ALL_CLEANED_CAPTIONS = None
+SIZE = 100
+MIN_COUNT = 5
+N_CORES = 8
+EPOCHS = 10
+WINDOW = 8
 
-model = Word2Vec(ALL_CLEANED_CAPTIONS, min_count=5)
-model.save("word2vec_instacities_default.model")
+model = gensim.models.Word2Vec(
+    ALL_CLEANED_CAPTIONS, 
+    size=SIZE, min_count=MIN_COUNT, 
+    workers=N_CORES, 
+    iter=EPOCHS, 
+    window=WINDOW)
+model.save("word2vec_instacities.model")
