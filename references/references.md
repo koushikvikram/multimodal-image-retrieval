@@ -25,3 +25,5 @@
 [The Little Book of Python Anti-Patterns](https://docs.quantifiedcode.com/python-anti-patterns/index.html)
 
 [Visualizing Word Vectors with t-SNE](https://www.kaggle.com/jeffd23/visualizing-word-vectors-with-t-sne)
+
+[Open in Streamlit Badge](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)
