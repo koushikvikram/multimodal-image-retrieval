@@ -24,20 +24,24 @@ class Dataset:
             caption.read(clean=clean)
             caption_id = caption.get_id()
             words = caption.get_data()
-            all_captions[caption_id] = words
+            if len(words) > 0:
+                all_captions[caption_id] = words
         self.__set_captions(all_captions)
-    def make_caption_datasets(self, path, min_count=5, split_ratio=(0.8,0.05,0.15)):
-        '''split captions into train, val and test sets and save them to path'''
-        raise NotImplementedError
+    def get_captions(self):
+        '''get words list for each caption along with their id'''
+        return self.captions_dataset
     def get_word2vec_dataset(self, min_count=5):
         '''make captions dataset for training word2vec'''
+        raise NotImplementedError
+    def get_caption_embeddings(self):
+        '''get a single vector representation from word2vec for each caption'''
+        raise NotImplementedError
+    def write_caption_datasets(self, path, min_count=5, split_ratio=(0.8,0.05,0.15)):
+        '''split captions into train, val and test sets and save them to path'''
         raise NotImplementedError
     def __set_captions(self, captions):
         '''set self.captions_dataset to captions'''
         self.captions_dataset = captions
-    def get_caption_embeddings(self):
-        '''get a single vector representation from word2vec for each caption'''
-        raise NotImplementedError
 
 
 class Caption:
