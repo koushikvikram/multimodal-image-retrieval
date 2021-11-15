@@ -81,7 +81,7 @@ class Caption:
         else:
             words = text.split(" ")
             self.__set_data(words)
-    def get_embeddings(self):
+    def get_embeddings(self, model):
         '''get word2vec embeddings of caption'''
         raise NotImplementedError
     def get_id(self):
