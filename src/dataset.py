@@ -34,9 +34,7 @@ class Dataset:
     def get_word2vec_dataset(self, min_count=5):
         '''make captions dataset for training word2vec'''
         # get all captions
-        captions = self.get_captions()
-        if len(captions) == 0:
-            self.read_captions(clean=True)
+        assert len(self.get_captions()) > 0, "Empty Dict: Check if read_captions(clean=True) was called"
         captions = self.get_captions()
         # get all words from the captions
         all_words = []
