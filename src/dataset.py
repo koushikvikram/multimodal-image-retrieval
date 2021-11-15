@@ -26,7 +26,7 @@ class Dataset:
             words = caption.get_data()
             all_captions[caption_id] = words
         self.__set_captions(all_captions)
-    def make_caption_datasets(self, path, min_count=5, train=0.8, val=0.05, test=0.15):
+    def make_caption_datasets(self, path, min_count=5, split_ratio=(0.8,0.05,0.15)):
         '''split captions into train, val and test sets and save them to path'''
         raise NotImplementedError
     def get_word2vec_dataset(self, min_count=5):
