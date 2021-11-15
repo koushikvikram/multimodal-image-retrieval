@@ -23,3 +23,5 @@
 [Continuous Integration for your data with GitHub Actions and Great Expectations](https://greatexpectations.io/blog/github-actions/)
 
 [The Little Book of Python Anti-Patterns](https://docs.quantifiedcode.com/python-anti-patterns/index.html)
+
+[Visualizing Word Vectors with t-SNE](https://www.kaggle.com/jeffd23/visualizing-word-vectors-with-t-sne)
