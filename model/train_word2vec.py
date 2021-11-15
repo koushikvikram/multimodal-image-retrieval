@@ -7,7 +7,7 @@ ALL_CLEANED_CAPTIONS = None
 
 model = Word2Vec(
     ALL_CLEANED_CAPTIONS,
-    size=cfg.SIZE, 
+    size=cfg.SIZE,
     min_count=cfg.MIN_COUNT,
     workers=cfg.N_CORES,
     iter=cfg.EPOCHS,
