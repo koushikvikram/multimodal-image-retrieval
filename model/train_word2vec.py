@@ -1,18 +1,15 @@
 '''Training script for Word2Vec on the dataset's captions'''
 from gensim.models import Word2Vec
+import config.word2vec as cfg
 
 
 ALL_CLEANED_CAPTIONS = None
-SIZE = 100
-MIN_COUNT = 5
-N_CORES = 8
-EPOCHS = 10
-WINDOW = 8
 
 model = Word2Vec(
     ALL_CLEANED_CAPTIONS,
-    size=SIZE, min_count=MIN_COUNT,
-    workers=N_CORES,
-    iter=EPOCHS,
-    window=WINDOW)
+    size=cfg.SIZE, 
+    min_count=cfg.MIN_COUNT,
+    workers=cfg.N_CORES,
+    iter=cfg.EPOCHS,
+    window=cfg.WINDOW)
 model.save("word2vec_instacities.model")
