@@ -2,6 +2,7 @@
 from typing import List
 import glob
 from collections import Counter
+from tqdm import tqdm
 
 import re
 import nltk
@@ -20,7 +21,7 @@ class Dataset:
         '''read all caption files'''
         filepaths = glob.glob(self.captions_path+"*.txt")
         all_captions = {}
-        for path in filepaths:
+        for path in tqdm(filepaths):
             caption = Caption(path)
             caption.read(clean=clean)
             caption_id = caption.get_id()
@@ -39,13 +40,15 @@ class Dataset:
         captions = self.get_captions()
         # get all words from the captions
         all_words = []
-        for words in captions.values():
+        print("Getting all words ...")
+        for words in tqdm(captions.values()):
             all_words.extend(words)
         # get counts for each word
         word_counts = Counter(all_words)
         # make a new list and store captions with words having a count>=5
         all_captions = []
-        for caption in captions.values():
+        print("Getting high-frequency captions")
+        for caption in tqdm(captions.values()):
             high_freq_words = []
             for word in caption:
                 if word_counts[word] >= min_count:
