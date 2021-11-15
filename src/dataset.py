@@ -53,7 +53,8 @@ class Dataset:
             for word in caption:
                 if word_counts[word] >= min_count:
                     high_freq_words.append(word)
-            all_captions.append(high_freq_words)
+            if len(high_freq_words) > 0:
+                all_captions.append(high_freq_words)
         return all_captions
     def get_caption_embeddings(self):
         '''get a single vector representation from word2vec for each caption'''
