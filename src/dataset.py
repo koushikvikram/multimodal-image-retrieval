@@ -32,6 +32,10 @@ class Dataset:
         return self.captions_dataset
     def get_word2vec_dataset(self, min_count=5):
         '''make captions dataset for training word2vec'''
+        # get all captions
+        # get all words from the captions
+        # get counts for each word
+        # make a new list and store captions with words having a count>=5
         raise NotImplementedError
     def get_caption_embeddings(self):
         '''get a single vector representation from word2vec for each caption'''
