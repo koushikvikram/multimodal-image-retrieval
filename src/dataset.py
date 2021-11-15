@@ -1,8 +1,9 @@
 '''Module for creating and working with the InstaNY100K dataset'''
 from typing import List
 import glob
-import re
+from collections import Counter
 
+import re
 import nltk
 from gensim.parsing.preprocessing import remove_stopwords
 from nltk.tokenize import word_tokenize
@@ -38,9 +39,20 @@ class Dataset:
             self.read_captions(clean=True)
         captions = self.get_captions()
         # get all words from the captions
+        all_words = []
+        for words in captions.values():
+            all_words.extend(words)
         # get counts for each word
+        word_counts = Counter(all_words)
         # make a new list and store captions with words having a count>=5
-        raise NotImplementedError
+        all_captions = []
+        for caption in captions.values():
+            high_freq_words = []
+            for word in caption:
+                if word_counts[word] >= min_count:
+                    high_freq_words.append(word)
+            all_captions.append(high_freq_words)
+        return all_captions
     def get_caption_embeddings(self):
         '''get a single vector representation from word2vec for each caption'''
         raise NotImplementedError
