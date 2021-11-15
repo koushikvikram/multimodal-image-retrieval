@@ -115,3 +115,4 @@ class Caption:
     def __set_data(self, data: List[str]):
         '''assign list of words to method's _data variable'''
         self._data = data
+
