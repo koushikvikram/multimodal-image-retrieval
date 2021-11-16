@@ -26,6 +26,8 @@
 
 [How to suppress py.test internal deprecation warnings](https://stackoverflow.com/questions/40710094/how-to-suppress-py-test-internal-deprecation-warnings)
 
+[Pytest AttributeError: 'function' object has no attribute 'test_func' - You need to pass example_instance as an argument to test_util_fun; it doesn't magically appear just because it's a fixture](https://stackoverflow.com/questions/56318433/pytest-attributeerror-function-object-has-no-attribute-test-func)
+
 [Continuous Integration for your data with GitHub Actions and Great Expectations](https://greatexpectations.io/blog/github-actions/)
 
 [The Little Book of Python Anti-Patterns](https://docs.quantifiedcode.com/python-anti-patterns/index.html)
