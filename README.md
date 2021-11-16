@@ -1,8 +1,6 @@
 # Multimodal Image Retrieval
 
-[![Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml)
-
-[![Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml/badge.svg)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml)
+[![Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml)  [![Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml/badge.svg)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml)
 
 > 🚦⚠️👷‍♂️🏗️ Repo Under Construction 🚦⚠️👷‍♂️🏗️
 
