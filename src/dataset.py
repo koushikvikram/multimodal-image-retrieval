@@ -9,7 +9,9 @@ import nltk
 from gensim.parsing.preprocessing import remove_stopwords
 from nltk.tokenize import word_tokenize
 
+
 nltk.download('punkt')
+
 
 class Dataset:
     '''Perform overall Dataset operations'''
