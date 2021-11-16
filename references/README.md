@@ -24,6 +24,8 @@
 
 [pytest cannot import module while python can](https://stackoverflow.com/questions/41748464/pytest-cannot-import-module-while-python-can)
 
+[How to suppress py.test internal deprecation warnings](https://stackoverflow.com/questions/40710094/how-to-suppress-py-test-internal-deprecation-warnings)
+
 [Continuous Integration for your data with GitHub Actions and Great Expectations](https://greatexpectations.io/blog/github-actions/)
 
 [The Little Book of Python Anti-Patterns](https://docs.quantifiedcode.com/python-anti-patterns/index.html)
