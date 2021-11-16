@@ -21,5 +21,5 @@ read_output = [
     '#artist', '#music', '#hiphop',
     '#effen', '#effenvodka', '#power',
     'tag', '@50cent', 'Thanks!']
-clean_output = ["go"]
+clean_output = ["go", "follow", "my"]
 ID_OUTPUT = "test"
