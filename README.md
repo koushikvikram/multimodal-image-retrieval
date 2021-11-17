@@ -13,8 +13,8 @@ A deep learning application to retrieve images by searching with text
 ## Exploring the Word2Vec Model
 
 <p align="middle">
-  <img src="images/similar/man.png" height=300 width="300" />
-  <img src="images/similar/family.png" height=300 width="300" /> 
-  <img src="images/similar/healthy.png" height=300 width=300" />
+  <img src="images/similar/man.png" height=200 width="200" />
+  <img src="images/similar/family.png" height=200 width="200" /> 
+  <img src="images/similar/healthy.png" height=200 width=200" />
 </p>
 
