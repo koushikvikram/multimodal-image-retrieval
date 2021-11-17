@@ -1,10 +1,11 @@
 '''Module for creating and working with the InstaNY100K dataset'''
-from caption import Caption
 
 import glob
 from collections import Counter
 from tqdm import tqdm
 import pickle
+
+from src.caption import Caption
 
 
 class EmptyDataset(Exception):
@@ -41,7 +42,24 @@ class Dataset:
             if len(words) > 0:
                 all_captions[caption_id] = words
         if min_count > 0:
-            high_freq_captions = self.__get_high_frequency_captions(all_captions, min_count)
+            # keep only words in captions with count >= min_count
+            # get all words from the captions
+            all_words = []
+            print("Getting all words ...")
+            for words in tqdm(all_captions.values()):
+                all_words.extend(list(words))
+            # get counts for each word
+            word_counts = Counter(all_words)
+            # make a new dict and store captions with words having a count>=5
+            high_freq_captions = {}
+            print("Getting High-Frequency Captions ...")
+            for caption_id, caption in tqdm(all_captions.items()):
+                high_freq_words = []
+                for word in caption:
+                    if word_counts[word] >= min_count:
+                        high_freq_words.append(word)
+                if len(high_freq_words) > 0:
+                    high_freq_captions[caption_id] = high_freq_words    
             self.__set_captions(high_freq_captions)
         else:
             self.__set_captions(all_captions)
@@ -58,26 +76,6 @@ class Dataset:
     def read_caption_embeddings_checkpoint(self, checkpoint):
         '''read caption embeddings files'''
         raise NotImplementedError
-    def __get_high_frequency_captions(self, all_captions, min_count):
-        '''make captions dataset with only words having count >= min_count'''
-        # get all words from the captions
-        all_words = []
-        print("Getting all words ...")
-        for words in tqdm(all_captions.values()):
-            all_words.extend(list(words))
-        # get counts for each word
-        word_counts = Counter(all_words)
-        # make a new dict and store captions with words having a count>=5
-        high_freq_captions = {}
-        print("Getting High-Frequency Captions ...")
-        for id, caption in tqdm(all_captions.items()):
-            high_freq_words = []
-            for word in caption:
-                if word_counts[word] >= min_count:
-                    high_freq_words.append(word)
-            if len(high_freq_words) > 0:
-                high_freq_captions[id] = high_freq_words
-        return high_freq_captions
     def make_word2vec_dataset(self):
         '''make captions dataset for training word2vec'''
         # check if high frequency dataset has already been created
