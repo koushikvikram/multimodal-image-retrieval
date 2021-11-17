@@ -28,6 +28,7 @@ class Dataset:
         self.captions_dataset = {}
         self.high_freq_dataset = {}
         self.word2vec_dataset = []
+        self.caption_embeddings_dataset = {}
         self.clean = False
         self.caption_freq_count = None
     def is_clean(self):
