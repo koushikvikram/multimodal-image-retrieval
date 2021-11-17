@@ -10,3 +10,11 @@ A deep learning application to retrieve images by searching with text
 
 [Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/blob/main/.github/workflows/pylint.yml) - Code Quality Check
 
+## Exploring the Word2Vec Model
+
+<p align="middle">
+  <img src="images/similar/man.png" height=300 width="300" />
+  <img src="images/similar/family.png" height=300 width="300" /> 
+  <img src="images/similar/healthy.png" height=300 width=300" />
+</p>
+
