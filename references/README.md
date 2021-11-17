@@ -32,6 +32,8 @@
 
 [The Little Book of Python Anti-Patterns](https://docs.quantifiedcode.com/python-anti-patterns/index.html)
 
+[A list of pylint-errors with reasoning and examples of erroneous and correct code.](https://vald-phoenix.github.io/pylint-errors/)
+
 [Gensim Word2Vec usage with t-SNE plot](https://www.kaggle.com/achintyatripathi/gensim-word2vec-usage-with-t-sne-plot?scriptVersionId=42638801&cellId=50)
 
 [Visualizing Word Vectors with t-SNE](https://www.kaggle.com/jeffd23/visualizing-word-vectors-with-t-sne)
