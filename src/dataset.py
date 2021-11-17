@@ -19,8 +19,13 @@ class Dataset:
         self.captions_path = captions_path
         self.images_path = images_path
         self.captions_dataset = {}
+        self.clean = False
+    def is_clean(self):
+        '''return True if captions were cleaned, else False'''
+        return self.clean
     def read_captions(self, clean=False):
         '''read all caption files'''
+        self.clean = clean
         filepaths = glob.glob(self.captions_path+"*.txt")
         all_captions = {}
         for path in tqdm(filepaths):
@@ -31,6 +36,12 @@ class Dataset:
             if len(words) > 0:
                 all_captions[caption_id] = words
         self.__set_captions(all_captions)
+    def read_captions_checkpoint(self, checkpoint):
+        '''read previously stored captions (list of words) files from checkpoint path'''
+        raise NotImplementedError
+    def read_caption_embeddings(self, checkpoint):
+        '''read caption embeddings files'''
+        raise NotImplementedError
     def get_captions(self):
         '''get words list for each caption along with their id'''
         return self.captions_dataset
@@ -61,8 +72,14 @@ class Dataset:
     def get_caption_embeddings(self):
         '''get a single vector representation from word2vec for each caption'''
         raise NotImplementedError
-    def write_caption_datasets(self, path, min_count=5, split_ratio=(0.8,0.05,0.15)):
-        '''split captions into train, val and test sets and save them to path'''
+    def split(self, ds_type, train, val, test):
+        '''split dataset into train, val and test sets'''
+        raise NotImplementedError
+    def write_captions(self, checkpoint, min_count=5):
+        '''write captions (list of words) to checkpoint path'''
+        raise NotImplementedError
+    def write_caption_embeddings(self, checkpoint):
+        '''write caption embeddings to checkpoint path'''
         raise NotImplementedError
     def __set_captions(self, captions):
         '''set self.captions_dataset to captions'''
