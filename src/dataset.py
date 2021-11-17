@@ -2,16 +2,18 @@
 
 import glob
 from collections import Counter
-from tqdm import tqdm
 import pickle
+from tqdm import tqdm
 
 from src.caption import Caption
 
 
 class EmptyDataset(Exception):
+    '''Raise when operation is called on a dataset before it has been created'''
     pass
 
 class IncorrectFileFormat(Exception):
+    '''Raise when file with wrong extension is given as input'''
     pass
 
 class Dataset:
@@ -59,7 +61,7 @@ class Dataset:
                     if word_counts[word] >= min_count:
                         high_freq_words.append(word)
                 if len(high_freq_words) > 0:
-                    high_freq_captions[caption_id] = high_freq_words    
+                    high_freq_captions[caption_id] = high_freq_words
             self.__set_captions(high_freq_captions)
         else:
             self.__set_captions(all_captions)
