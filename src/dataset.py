@@ -13,12 +13,16 @@ from nltk.tokenize import word_tokenize
 nltk.download('punkt')
 
 
+class EmptyDataset(Exception):
+    pass
+
 class Dataset:
     '''Perform overall Dataset operations'''
     def __init__(self, captions_path: str, images_path: str):
         self.captions_path = captions_path
         self.images_path = images_path
         self.captions_dataset = {}
+        self.word2vec_dataset = []
         self.clean = False
     def is_clean(self):
         '''return True if captions were cleaned, else False'''
@@ -42,14 +46,11 @@ class Dataset:
     def read_caption_embeddings(self, checkpoint):
         '''read caption embeddings files'''
         raise NotImplementedError
-    def get_captions(self):
-        '''get words list for each caption along with their id'''
-        return self.captions_dataset
-    def get_word2vec_dataset(self, min_count=5):
+    def make_word2vec_dataset(self, min_count=5):
         '''make captions dataset for training word2vec'''
         # get all captions
-        assert len(self.get_captions()) > 0, \
-        "Empty dict: Check if read_captions(clean=True) was called"
+        if len(self.get_captions()) == 0:
+            raise EmptyDataset("Empty dict: Check if .read_captions() was called")
         captions = self.get_captions()
         # get all words from the captions
         all_words = []
@@ -68,10 +69,18 @@ class Dataset:
                     high_freq_words.append(word)
             if len(high_freq_words) > 0:
                 all_captions.append(high_freq_words)
-        return all_captions
+        self.word2vec_dataset = all_captions
+    def get_captions(self):
+        '''get words list for each caption along with their id'''
+        return self.captions_dataset
     def get_caption_embeddings(self):
         '''get a single vector representation from word2vec for each caption'''
         raise NotImplementedError
+    def get_word2vec_dataset(self):
+        '''returns a word2vec dataset'''
+        if len(self.word2vec_dataset) == 0:
+            raise EmptyDataset("Empty dataset. Try calling .make_word2vec_dataset() first")
+        return self.word2vec_dataset
     def split(self, ds_type, train, val, test):
         '''split dataset into train, val and test sets'''
         raise NotImplementedError
@@ -84,7 +93,6 @@ class Dataset:
     def __set_captions(self, captions):
         '''set self.captions_dataset to captions'''
         self.captions_dataset = captions
-
 
 class Caption:
     '''Perform operations on individual caption textfiles'''
