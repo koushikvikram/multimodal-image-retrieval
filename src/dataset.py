@@ -103,7 +103,7 @@ class Dataset:
     def get_captions(self):
         '''get words list for each caption along with their id'''
         return self.captions_dataset
-    def get_caption_embeddings(self):
+    def get_caption_embeddings(self, model):
         '''get a single vector representation from word2vec for each caption'''
         raise NotImplementedError
     def get_high_frequency_captions(self):
@@ -184,9 +184,6 @@ class Caption:
         else:
             words = text.split(" ")
             self.__set_data(words)
-    def get_embeddings(self, model):
-        '''get word2vec embeddings of caption'''
-        raise NotImplementedError
     def get_id(self):
         '''get caption's ID, present in filename'''
         filename = self._fpath.split("/")[-1]
