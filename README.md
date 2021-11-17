@@ -6,6 +6,33 @@
 
 A deep learning application to retrieve images by searching with text
 
+## Dataset
+
+Download the InstaNY100K dataset from this [Google Drive link](https://drive.google.com/file/d/1blGgEOlrHrM0-NAQxYVRwMlfiHDvVHXb/view?usp=sharing)
+
+Extract the dataset in the path, `./datasets/raw/`. You folder structure should look like the one below:
+
+```
+./datasets/raw/
+|
+|-- InstaNY100K
+    |
+    |-- captions
+    |   |
+    |   |-- newyork
+    |      | 1487768220566960691.txt
+    |      | 1490727714071958379.txt
+    |      | ...
+    |   
+    |-- img_resized
+        |
+        |-- newyork
+            | 1480879485913200243.jpg
+            | 1480879539524935620.jpg
+            | ...
+```
+
+
 ## GitHub Actions for this Repository
 
 [Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/blob/main/.github/workflows/pylint.yml) - Code Quality Check
