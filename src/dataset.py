@@ -10,11 +10,11 @@ from src.caption import Caption
 
 class EmptyDataset(Exception):
     '''Raise when operation is called on a dataset before it has been created'''
-    pass
+
 
 class IncorrectFileFormat(Exception):
     '''Raise when file with wrong extension is given as input'''
-    pass
+
 
 class Dataset:
     '''Perform overall Dataset operations'''
