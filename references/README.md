@@ -32,6 +32,8 @@
 
 [The Little Book of Python Anti-Patterns](https://docs.quantifiedcode.com/python-anti-patterns/index.html)
 
+[Gensim Word2Vec usage with t-SNE plot](https://www.kaggle.com/achintyatripathi/gensim-word2vec-usage-with-t-sne-plot?scriptVersionId=42638801&cellId=50)
+
 [Visualizing Word Vectors with t-SNE](https://www.kaggle.com/jeffd23/visualizing-word-vectors-with-t-sne)
 
 [Open in Streamlit Badge](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)
