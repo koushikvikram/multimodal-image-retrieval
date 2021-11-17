@@ -16,5 +16,11 @@ A deep learning application to retrieve images by searching with text
   <img src="images/similar/man.png" height=250 width="250" />
   <img src="images/similar/family.png" height=250 width="250" /> 
   <img src="images/similar/healthy.png" height=250 width=250" />
+  <img src="images/similar/car.png" height=250 width=250" />
+  <img src="images/similar/dog.png" height=250 width=250" />
+  <img src="images/similar/sports.png" height=250 width=250" />
+  <img src="images/similar/hairstyle.png" height=250 width=250" />
+  <img src="images/similar/food.png" height=250 width=250" />
+  <img src="images/similar/toronto.png" height=250 width=250" />
 </p>
 
