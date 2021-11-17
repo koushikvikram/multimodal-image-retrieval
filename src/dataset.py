@@ -26,7 +26,6 @@ class Dataset:
         self.captions_path = captions_path
         self.images_path = images_path
         self.captions_dataset = {}
-        self.high_freq_dataset = {}
         self.word2vec_dataset = []
         self.caption_embeddings_dataset = {}
         self.clean = False
@@ -34,7 +33,7 @@ class Dataset:
     def is_clean(self):
         '''return True if captions were cleaned, else False'''
         return self.clean
-    def read_captions(self, clean=False):
+    def read_captions(self, clean=False, min_count=0):
         '''read all caption files'''
         self.clean = clean
         filepaths = glob.glob(self.captions_path+"*.txt")
@@ -48,7 +47,11 @@ class Dataset:
             words = caption.get_data()
             if len(words) > 0:
                 all_captions[caption_id] = words
-        self.__set_captions(all_captions)
+        if min_count > 0:
+            high_freq_captions = self.__get_high_frequency_captions(all_captions, min_count)
+            self.__set_captions(high_freq_captions)
+        else:
+            self.__set_captions(all_captions)
     def read_captions_checkpoint(self, checkpoint):
         '''read previously stored .pkl captions (list of words) files from checkpoint path'''
         try:
@@ -56,20 +59,14 @@ class Dataset:
                 all_captions = pickle.load(file)
         except:
             raise IncorrectFileFormat("Please specify the correct path to pickle file")
-        if not isinstance(type(list(all_captions.values())[0][0]), str):
-            raise IncorrectFileFormat("dict.values() is not List[str]: Possibly incorrect pickle file")
+        if not isinstance(list(all_captions.values())[0][0], str):
+            raise IncorrectFileFormat("dict value is not List[str]: Possibly incorrect pickle file")
         self.__set_captions(all_captions)
     def read_caption_embeddings_checkpoint(self, checkpoint):
         '''read caption embeddings files'''
         raise NotImplementedError
-    def make_high_frequency_captions(self, min_count=5):
+    def __get_high_frequency_captions(self, all_captions, min_count):
         '''make captions dataset with only words having count >= min_count'''
-        # get all captions
-        all_captions = self.get_captions()
-        if len(all_captions) == 0:
-            raise EmptyDataset("Empty dict: Check if .read_captions() was called")
-        # set self.min_count
-        self.caption_freq_count = min_count
         # get all words from the captions
         all_words = []
         print("Getting all words ...")
@@ -80,36 +77,29 @@ class Dataset:
         # make a new dict and store captions with words having a count>=5
         high_freq_captions = {}
         print("Getting High-Frequency Captions ...")
-        for id, caption in tqdm(all_captions):
+        for id, caption in tqdm(all_captions.items()):
             high_freq_words = []
             for word in caption:
                 if word_counts[word] >= min_count:
                     high_freq_words.append(word)
             if len(high_freq_words) > 0:
                 high_freq_captions[id] = high_freq_words
-        self.high_freq_dataset = high_freq_captions
-    def make_word2vec_dataset(self, min_count=5):
+        return high_freq_captions
+    def make_word2vec_dataset(self):
         '''make captions dataset for training word2vec'''
         # check if high frequency dataset has already been created
         # and if high frequency dataset was created with same min_count
-        if self.caption_freq_count and self.caption_freq_count == min_count:
-            high_freq_captions = self.get_high_frequency_captions()
-        else:
-            self.make_high_frequency_captions(min_count=min_count)
-            high_freq_captions = self.get_high_frequency_captions()
+        all_captions = self.get_captions()
         word2vec_dataset = []
-        for words in high_freq_captions.values():
+        for words in all_captions.values():
             word2vec_dataset.append(list(words))
         self.word2vec_dataset = word2vec_dataset
     def get_captions(self):
         '''get words list for each caption along with their id'''
         return self.captions_dataset
-    def get_caption_embeddings(self, model):
+    def get_caption_embeddings(self, model, ds_type):
         '''get a single vector representation from word2vec for each caption'''
         raise NotImplementedError
-    def get_high_frequency_captions(self):
-        '''get high frequency captions dataset'''
-        return self.high_freq_dataset
     def get_word2vec_dataset(self):
         '''returns a word2vec dataset'''
         if len(self.word2vec_dataset) == 0:
@@ -130,15 +120,6 @@ class Dataset:
     def write_caption_embeddings(self, checkpoint):
         '''write caption embeddings to checkpoint path'''
         raise NotImplementedError
-    def write_high_frequency_captions(self, checkpoint):
-        '''write high frequency captions to checkpoint path'''
-        if checkpoint.split(".")[-1] not in ["pkl", "pickle"]:
-            raise IncorrectFileFormat("checkpoint should end in .pkl or .pickle")
-        high_freq_captions = self.get_high_frequency_captions()
-        if len(high_freq_captions) == 0:
-            raise EmptyDataset("High Frequency Captions dataset is empty.")
-        with open(checkpoint, "wb") as file:
-            pickle.dump(high_freq_captions, file)
     def write_word2vec_dataset(self, checkpoint):
         '''write Word2Vec dataset to checkpoint path'''
         if checkpoint.split(".")[-1] not in ["pkl", "pickle"]:
