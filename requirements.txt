@@ -1,7 +1,7 @@
-numpy
-pandas
-matplotlib
-scikit-learn
-seaborn
-nltk
-gensim
+numpy == 1.19.5
+pandas == 1.1.5
+matplotlib == 3.2.2
+scikit-learn == 1.0.1
+seaborn == 0.11.2
+nltk == 3.2.5
+gensim == 3.6.0
