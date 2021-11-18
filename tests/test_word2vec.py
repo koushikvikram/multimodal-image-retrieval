@@ -5,15 +5,13 @@ import pytest
 from gensim.models import Word2Vec
 
 import config.word2vec as wv_cfg
+import config.model as model_cfg
 
-
-MODEL_PATH = os.path.abspath("../model/word2vec.model")
 
 @pytest.fixture
 def model():
-    '''trained word2vec model'''
-    w2v = Word2Vec.load(MODEL_PATH)
-    return w2v
+    '''returns an instance of the trained Word2Vec model'''
+    return model_cfg.WORD2VEC_MODEL
 
 def test_vector_size(model):
     '''verify size of individual word vector'''
