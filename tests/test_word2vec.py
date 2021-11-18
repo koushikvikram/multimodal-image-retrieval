@@ -7,12 +7,10 @@ from gensim.models import Word2Vec
 import config.word2vec as wv_cfg
 
 
-MODEL_PATH = os.path.abspath("../model/word2vec.model")
-
 @pytest.fixture
 def model():
     '''trained word2vec model'''
-    w2v = Word2Vec.load(MODEL_PATH)
+    w2v = Word2Vec.load("word2vec.model")
     return w2v
 
 def test_vector_size(model):
