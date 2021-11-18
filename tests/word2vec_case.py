@@ -32,6 +32,7 @@ NON_MATCHING_PAIRS = [
     ("travel adventure fun work".split(), "work"),
     ("guy man dude girl".split(), "girl"),
     ("park tree forest museum".split(), "museum"),
+    ("coffee latte espresso burger".split(), "burger"),
 ]
 
 SIMILAR_WORDS = [
@@ -44,4 +45,5 @@ SIMILAR_WORDS = [
     ("travel", "adventure"),
     ("guy", "man"),
     ("tree", "forest"),
+    ("coffee", "latte"),
 ]
