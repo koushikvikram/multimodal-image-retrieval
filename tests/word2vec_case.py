@@ -8,7 +8,7 @@ VOCAB_WORDS = [
     "outdoor",
     "travel",
     "fun",
-    "delicious"
+    "delicious",
 ]
 
 STOP_WORDS = [
@@ -19,7 +19,9 @@ STOP_WORDS = [
     'image',
     'insta',
     'instagram',
-    'post'
+    'post',
+    'but',
+    'than',
 ]
 
 NON_MATCHING_PAIRS = [
