@@ -35,9 +35,9 @@ Extract the dataset in the path, `./datasets/raw/`. You folder structure should 
 
 ## GitHub Actions for this Repository
 
-[Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml) - Code Quality Check
+[Pylint - Code Quality Check](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml)
 
-[Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml) - Functionality and Behavioral Tests for Classes and Models
+[Pytest - Functionality and Behavioral Tests for Classes and Models](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml)
 
 ## Exploring the Word2Vec Model
 
