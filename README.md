@@ -41,11 +41,21 @@ Extract the dataset in the path, `./datasets/raw/`. You folder structure should 
 
 ## Exploring the Word2Vec Model
 
+We recommend using the [TensorFlow Embedding Projector](http://projector.tensorflow.org/) to visualize our Word2Vec model.
+
+Load the [tensor](https://github.com/koushikvikram/multimodal-image-retrieval/blob/main/model/word2vec_viz_tensor.tsv) and [metadata](https://github.com/koushikvikram/multimodal-image-retrieval/blob/main/model/word2vec_viz_metadata.tsv) tsv files provided in the model directory and visualize words that interest you!
+
+Samples from TensorFlow Embedding Projector:
+
 <p align="middle">
   <img src="images/instany-word2vec-viz.gif" height=500 width="750" />
   <img src="images/similar/sports-sphere.gif" height=500 width="750" />
   <img src="images/similar/family-sphere.gif" height=500 width="750" />
 </p>
+
+You can also use [models/explore_word2vec.ipynb](https://github.com/koushikvikram/multimodal-image-retrieval/blob/main/model/explore_word2vec.ipynb) to explore words of interest.
+
+Samples from the Jupyter Notebook:
 
 <p align="middle">
   <img src="images/similar/man.png" height=250 width="250" />
