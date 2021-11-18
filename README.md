@@ -42,9 +42,9 @@ Extract the dataset in the path, `./datasets/raw/`. You folder structure should 
 ## Exploring the Word2Vec Model
 
 <p align="middle">
-  <img src="images/instany-word2vec-viz.gif" height=250 width="250" />
-  <img src="images/similar/sports-sphere.gif" height=250 width="250" />
-  <img src="images/similar/family-sphere.gif" height=500 width="500" />
+  <img src="images/instany-word2vec-viz.gif" height=500 width="750" />
+  <img src="images/similar/sports-sphere.gif" height=500 width="750" />
+  <img src="images/similar/family-sphere.gif" height=500 width="750" />
 </p>
 
 <p align="middle">
