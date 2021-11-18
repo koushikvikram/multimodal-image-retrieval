@@ -1,4 +1,4 @@
-'''Data Preparation and Training script for Word2Vec'''
+'''Data Preparation and Training script for Word2Vec Model'''
 
 from gensim.models import Word2Vec
 
