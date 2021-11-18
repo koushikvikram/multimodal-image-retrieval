@@ -8,6 +8,8 @@ import config.dataset as ds_cfg
 
 
 def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
+    '''Make a word2vec dataset from txt caption files.
+    Save clean high frequency captions and the word2vec dataset'''
     # make captions dataset
     dataset = Dataset(
         captions_path=captions_path,
@@ -24,6 +26,7 @@ def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
     return dataset
 
 def make_word2vec_model(word2vec_dataset: Dataset, checkpoint):
+    '''train word2vec and save to disk'''
     # get word2vec dataset
     word2vec_ds = word2vec_dataset.get_word2vec_dataset()
 
