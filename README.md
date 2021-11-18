@@ -37,6 +37,8 @@ Extract the dataset in the path, `./datasets/raw/`. You folder structure should 
 
 [Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/blob/main/.github/workflows/pylint.yml) - Code Quality Check
 
+[Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/blob/main/.github/workflows/pytest.yml) - Functionality and Behavioral Tests for Classes and Models
+
 ## Exploring the Word2Vec Model
 
 <p align="middle">
@@ -51,3 +53,12 @@ Extract the dataset in the path, `./datasets/raw/`. You folder structure should 
   <img src="images/similar/toronto.png" height=250 width=250" />
 </p>
 
+## Acknowledgment
+
+Articles used as reference during development are documented in the [references](https://github.com/koushikvikram/multimodal-image-retrieval/tree/main/references) directory.
+
+If you run into issues while testing the platform, please create an issue on this GitHub repository at the following link and I'll be glad to fix it: https://github.com/koushikvikram/multimodal-image-retrieval/issues
+
+If you'd like to collaborate with me or hire me, please feel free to send an email to koushikvikram91@gmail.com
+
+Make sure to check out other repositories on my [homepage](https://github.com/koushikvikram).
