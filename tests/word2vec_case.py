@@ -27,11 +27,11 @@ NON_MATCHING_PAIRS = [
     ("spoon saturday friday sunday".split(), "spoon"),
     ("toronto montreal vancouver newyork".split(), "newyork"),
     ("paint art boy".split(), "boy"),
-    ("hot cool sexy fun".split(), "fun")
+    ("hot cool sexy fun".split(), "fun"),
     ("rain snow wind street".split(), "street"),
     ("travel adventure fun work".split(), "work"),
     ("guy man dude girl".split(), "girl"),
-    ("park tree forest museum".split(), "museum")
+    ("park tree forest museum".split(), "museum"),
 ]
 
 SIMILAR_WORDS = [
@@ -43,5 +43,5 @@ SIMILAR_WORDS = [
     ("rain", "snow"),
     ("travel", "adventure"),
     ("guy", "man"),
-    ("tree", "forest")
+    ("tree", "forest"),
 ]
