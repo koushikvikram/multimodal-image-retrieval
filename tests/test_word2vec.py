@@ -38,3 +38,4 @@ def test_word_presence(model, present_word):
 def test_word_absence(model, stop_word):
     '''verify the absence of stop words'''
     assert stop_word not in model.wv.vocab
+
