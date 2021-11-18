@@ -1,9 +1,0 @@
-numpy
-pandas
-matplotlib
-scikit-learn
-seaborn
-gensim == 3.6.0
-voila
-ipywidgets
-ipykernel

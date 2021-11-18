@@ -40,7 +40,7 @@ def make_word2vec_model(word2vec_dataset: Dataset, checkpoint):
         window=wv_cfg.WINDOW)
 
     # save the trained model
-    model.save(checkpoint)
+    model.wv.save_word2vec_format(checkpoint)
 
 
 if __name__ == "__main__":
