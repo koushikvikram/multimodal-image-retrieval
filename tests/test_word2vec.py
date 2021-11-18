@@ -1,12 +1,13 @@
 '''behavioral and functional tests for the word2vec model'''
 
+import os
 import pytest
 from gensim.models import Word2Vec
 
 import config.word2vec as wv_cfg
 
 
-MODEL_PATH = "../model/word2vec.model"
+MODEL_PATH = os.path.abspath("../model/word2vec.model")
 
 @pytest.fixture
 def model():
