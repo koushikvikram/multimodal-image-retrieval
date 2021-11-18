@@ -24,4 +24,4 @@ def test_window_size(model):
 
 def test_epochs(model):
     '''verify number of epochs model was trained for'''
-    assert model.iter == wv_cfg.EPOCHS
+    assert model.epochs == wv_cfg.EPOCHS
