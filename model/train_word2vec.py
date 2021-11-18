@@ -4,7 +4,7 @@ from gensim.models import Word2Vec
 
 from src.dataset import Dataset
 import config.word2vec as wv_cfg
-import config.dataset as ds_cfg 
+import config.dataset as ds_cfg
 
 
 def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
@@ -23,13 +23,13 @@ def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
     dataset.write_word2vec_dataset(word2vec_checkpoint)
     return dataset
 
-def make_word2vec_model(dataset: Dataset, checkpoint):
+def make_word2vec_model(word2vec_dataset: Dataset, checkpoint):
     # get word2vec dataset
-    WORD2VEC_DATASET = dataset.get_word2vec_dataset()
+    word2vec_ds = word2vec_dataset.get_word2vec_dataset()
 
     # train word2vec model
     model = Word2Vec(
-        WORD2VEC_DATASET,
+        word2vec_ds,
         size=wv_cfg.SIZE,
         min_count=wv_cfg.MIN_COUNT,
         workers=wv_cfg.N_CORES,
@@ -41,8 +41,13 @@ def make_word2vec_model(dataset: Dataset, checkpoint):
 
 
 if __name__ == "__main__":
-    clean_captions_checkpoint = ds_cfg.PROCESSED_CAPTIONS_PATH + "cleaned" + "/" + "clean_captions_min_count_5.pkl"
-    word2vec_dataset_checkpoint = ds_cfg.PROCESSED_CAPTIONS_PATH + "word2vec" + "/" + "word2vec_dataset.pkl"
+    clean_captions_checkpoint = ds_cfg.PROCESSED_CAPTIONS_PATH + \
+        "cleaned" + "/" + "clean_captions_min_count_5.pkl"
+    word2vec_dataset_checkpoint = ds_cfg.PROCESSED_CAPTIONS_PATH + \
+        "word2vec" + "/" + "word2vec_dataset.pkl"
     word2vec_model_checkpoint = "word2vec.model"
-    dataset = make_dataset(ds_cfg.CAPTIONS_PATH, clean_captions_checkpoint, word2vec_dataset_checkpoint)
-    make_word2vec_model(dataset, word2vec_model_checkpoint)
+    w2v_dataset = make_dataset(
+        ds_cfg.CAPTIONS_PATH,
+        clean_captions_checkpoint,
+        word2vec_dataset_checkpoint)
+    make_word2vec_model(w2v_dataset, word2vec_model_checkpoint)
