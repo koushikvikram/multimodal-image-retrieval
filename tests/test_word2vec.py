@@ -28,14 +28,13 @@ def test_epochs(model):
     '''verify number of epochs model was trained for'''
     assert model.epochs == wv_cfg.EPOCHS
 
-@pytest.mark.parametrize("present_word", VOCAB_WORDS)
-@pytest.mark.parametrize("stop_word", STOP_WORDS)
-
 # test model behavior
+@pytest.mark.parametrize("present_word", VOCAB_WORDS)
 def test_word_presence(model, present_word):
     '''verify the presence of high frequency words from our dataset'''
     assert present_word in model.wv.vocab
 
+@pytest.mark.parametrize("stop_word", STOP_WORDS)
 def test_word_absence(model, stop_word):
     '''verify the absence of stop words'''
     assert stop_word not in model.wv.vocab
