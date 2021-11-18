@@ -1,5 +1,6 @@
 '''behavioral and functional tests for the word2vec model'''
 
+import pytest
 from gensim.models import Word2Vec
 
 import config.word2vec as wv_cfg
