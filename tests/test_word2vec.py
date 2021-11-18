@@ -11,8 +11,8 @@ import config.word2vec as wv_cfg
 def model():
     '''returns an instance of the trained Word2Vec model'''
     model_path = os.environ.get('WORD2VEC_MODEL_PATH') + "word2vec.model"
-    model = Word2Vec.load(model_path)
-    return model
+    w2v = Word2Vec.load(model_path)
+    return w2v
 
 def test_vector_size(model):
     '''verify size of individual word vector'''
