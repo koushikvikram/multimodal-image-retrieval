@@ -15,7 +15,7 @@ class EmptyDataset(Exception):
 
 
 class Dataset:
-    '''Perform overall Dataset operations'''
+    '''Perform operations on Captions Dataset'''
     def __init__(self, captions_path: str):
         self.captions_path = captions_path
         self.captions_dataset = {}
