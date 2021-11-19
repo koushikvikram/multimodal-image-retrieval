@@ -54,27 +54,26 @@ def read_caption_dataset_clean_min_count_3():
     return cap_ds
 
 
-def test_caption_dataset_unclean_read():
+def test_caption_dataset_unclean_read(read_caption_dataset_unclean):
     '''test if dataset was read correctly'''
     assert read_caption_dataset_unclean.get_captions() == UNCLEAN_READ_RESULT
 
 
-def test_caption_dataset_clean_read():
+def test_caption_dataset_clean_read(read_caption_dataset_clean):
     '''test if dataset was read and cleaned'''
     assert read_caption_dataset_clean.get_captions() == CLEAN_READ_RESULT
 
 
-def test_caption_dataset_unclean_min_count_read():
+def test_caption_dataset_unclean_min_count_read(read_caption_dataset_unclean_min_count_3):
     '''test if dataset with only words with count >= 3'''
     assert read_caption_dataset_unclean_min_count_3.get_captions() == UNCLEAN_MIN_COUNT_3_RESULT
 
 
-def test_caption_dataset_clean_min_count_read():
+def test_caption_dataset_clean_min_count_read(read_caption_dataset_clean_min_count_2):
     '''test if dataset is clean with only words with count >= 2'''
     assert read_caption_dataset_clean_min_count_2.get_captions() == CLEAN_MIN_COUNT_2_RESULT
 
 
-def test_caption_dataset_clean_min_count_3_read():
+def test_caption_dataset_clean_min_count_3_read(read_caption_dataset_clean_min_count_3):
     '''test if dataset is clean with only words with count >= 3'''
     assert read_caption_dataset_clean_min_count_3.get_captions() == {}
-
