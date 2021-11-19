@@ -67,10 +67,11 @@ def test_incorrect_file_format(file_path):
     assert str(exceptioninfo.value) == "Please provide a file with .txt extension"
 
 @pytest.mark.parametrize(
-    'filepath',
+    'file_path',
     NON_EXISTING_FILES
 )
-def test_non_existing_file(get_raw_captions):
+def test_non_existing_file(file_path):
     '''check if exceptions are raised correctly on file not present'''
+    dataset_path = os.environ.get('TESTING_CAPTIONS_DATASET_PATH')
     with pytest.raises(FileNotFoundError):
-        get_raw_captions
+        Caption(dataset_path + file_path)
