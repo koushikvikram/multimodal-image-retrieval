@@ -30,10 +30,10 @@ def get_caption_id(filepath):
     return c.get_id()
 
 @pytest.mark.parametrize(
-    "file_path, raw_captions",
+    "get_raw_captions, raw_captions",
     list(zip(FILE_NAMES, RAW_CAPTIONS)),
     )
-def test_raw_captions(get_raw_captions, file_path, raw_captions):
+def test_raw_captions(get_raw_captions, raw_captions):
     '''test if captions are read correctly without cleaning'''
-    assert get_raw_captions(file_path) == raw_captions
+    assert get_raw_captions == raw_captions
 
