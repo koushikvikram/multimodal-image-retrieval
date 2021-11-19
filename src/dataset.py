@@ -3,6 +3,7 @@
 import glob
 from collections import Counter
 import pickle
+import random
 from tqdm import tqdm
 
 from src.embedding import compute_embedding
@@ -15,9 +16,8 @@ class EmptyDataset(Exception):
 
 class Dataset:
     '''Perform overall Dataset operations'''
-    def __init__(self, captions_path: str, images_path: str):
+    def __init__(self, captions_path: str):
         self.captions_path = captions_path
-        self.images_path = images_path
         self.captions_dataset = {}
         self.word2vec_dataset = []
         self.caption_embeddings_dataset = {}
@@ -109,12 +109,36 @@ class Dataset:
         if len(self.word2vec_dataset) == 0:
             raise EmptyDataset("Empty dataset. Try calling .make_word2vec_dataset() first")
         return self.word2vec_dataset
-    def get_split(self, ds_type, train, val, test):
+    def get_split(self, ds_type, train, val, test, shuffle=False):
         '''split dataset into train, val and test sets'''
-        raise NotImplementedError
-    def write_split(self, checkpoint_dir):
+        # get dataset
+        if ds_type == "captions":
+            dataset = self.get_captions()
+        elif ds_type == "embeddings":
+            dataset = self.get_caption_embeddings()
+        else:
+            raise ValueError("ds_type should either be 'captions' or 'embeddings'")
+        if len(dataset) == 0:
+            raise EmptyDataset("{} dataset is empty.".format(ds_type))
+        dataset_keys = list(dataset.keys())
+        if shuffle:
+            random.shuffle(dataset_keys)
+        # calculate training and validation set ending index
+        train_end_index = int(len(dataset_keys)*train)
+        val_end_index = train_end_index + int(len(dataset_keys)*val)
+        # generate train, val and test sets
+        train_set = {id: dataset[id] for id in dataset_keys[:train_end_index]}
+        val_set = {id: dataset[id] for id in dataset_keys[train_end_index:val_end_index]}
+        test_set = {id: dataset[id] for id in dataset_keys[val_end_index:]}
+        # return train, val and test sets
+        return train_set, val_set, test_set
+    def write_split(self, ds_type, train, val, test, checkpoint_dir, shuffle=False):
         '''write the train, val and test sets to checkpoint_dir directory'''
-        raise NotImplementedError
+        train_set, val_set, test_set = self.get_split(ds_type, train, val, test, shuffle)
+        file_path = checkpoint_dir+"{}_{}.pkl"
+        for split_type in ["train", "val", "test"]:
+            with open(file_path.format(split_type, ds_type), 'wb') as file:
+                pickle.dump(file)
     def write_captions(self, checkpoint):
         '''write captions (list of words) to checkpoint path'''
         if checkpoint.split(".")[-1] not in ["pkl", "pickle"]:
