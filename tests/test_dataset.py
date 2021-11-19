@@ -11,7 +11,7 @@ from tests.captiondataset_case import CLEAN_MIN_COUNT_2_RESULT
 
 @pytest.fixture
 def read_caption_dataset_unclean():
-    '''read captions txt files and return unclean CaptionDataset'''
+    '''read and return unclean CaptionDataset'''
     dataset_path = os.environ.get('MIN_VIABLE_TESTING_DS_PATH')
     cap_ds = CaptionDataset(dataset_path)
     cap_ds.read_captions()
@@ -20,7 +20,7 @@ def read_caption_dataset_unclean():
 
 @pytest.fixture
 def read_caption_dataset_clean():
-    '''read captions txt files and return unclean CaptionDataset'''
+    '''read return clean CaptionDataset'''
     dataset_path = os.environ.get('MIN_VIABLE_TESTING_DS_PATH')
     cap_ds = CaptionDataset(dataset_path)
     cap_ds.read_captions(clean=True)
@@ -28,8 +28,8 @@ def read_caption_dataset_clean():
 
 
 @pytest.fixture
-def read_caption_dataset_unclean_min_count():
-    '''read captions txt files and return unclean CaptionDataset'''
+def read_caption_dataset_unclean_min_count_3():
+    '''read and return unclean CaptionDataset with min_count 3'''
     dataset_path = os.environ.get('MIN_VIABLE_TESTING_DS_PATH')
     cap_ds = CaptionDataset(dataset_path)
     cap_ds.read_captions(min_count=3)
@@ -37,29 +37,44 @@ def read_caption_dataset_unclean_min_count():
 
 
 @pytest.fixture
-def read_caption_dataset_clean_min_count():
-    '''read captions txt files and return unclean CaptionDataset'''
+def read_caption_dataset_clean_min_count_2():
+    '''read and return clean CaptionDataset with min_count 2'''
     dataset_path = os.environ.get('MIN_VIABLE_TESTING_DS_PATH')
     cap_ds = CaptionDataset(dataset_path)
     cap_ds.read_captions(clean=True, min_count=2)
     return cap_ds
 
 
+@pytest.fixture
+def read_caption_dataset_clean_min_count_3():
+    '''read and return clean CaptionDataset with min_count 3'''
+    dataset_path = os.environ.get('MIN_VIABLE_TESTING_DS_PATH')
+    cap_ds = CaptionDataset(dataset_path)
+    cap_ds.read_captions(clean=True, min_count=3)
+    return cap_ds
+
+
 def test_caption_dataset_unclean_read():
     '''test if dataset was read correctly'''
-    assert read_caption_dataset_unclean == UNCLEAN_READ_RESULT
+    assert read_caption_dataset_unclean.get_captions() == UNCLEAN_READ_RESULT
 
 
 def test_caption_dataset_clean_read():
     '''test if dataset was read and cleaned'''
-    assert read_caption_dataset_clean == CLEAN_READ_RESULT
+    assert read_caption_dataset_clean.get_captions() == CLEAN_READ_RESULT
 
 
 def test_caption_dataset_unclean_min_count_read():
-    '''test if dataset only has words with count >= 3'''
-    assert read_caption_dataset_unclean_min_count == UNCLEAN_MIN_COUNT_3_RESULT
+    '''test if dataset with only words with count >= 3'''
+    assert read_caption_dataset_unclean_min_count_3.get_captions() == UNCLEAN_MIN_COUNT_3_RESULT
 
 
 def test_caption_dataset_clean_min_count_read():
-    '''test if dataset is clean and only has words with count >= 2'''
-    assert read_caption_dataset_clean_min_count == CLEAN_MIN_COUNT_2_RESULT
+    '''test if dataset is clean with only words with count >= 2'''
+    assert read_caption_dataset_clean_min_count_2.get_captions() == CLEAN_MIN_COUNT_2_RESULT
+
+
+def test_caption_dataset_clean_min_count_3_read():
+    '''test if dataset is clean with only words with count >= 3'''
+    assert read_caption_dataset_clean_min_count_3.get_captions() == {}
+
