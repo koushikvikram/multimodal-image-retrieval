@@ -11,7 +11,7 @@ from tests.word2vec_case import NON_MATCHING_PAIRS, VOCAB_WORDS, STOP_WORDS, SIM
 @pytest.fixture
 def model():
     '''returns an instance of the trained Word2Vec model'''
-    model_path = os.environ.get('WORD2VEC_MODEL_PATH') + "word2vec_format.model"
+    model_path = os.environ.get('WORD2VEC_MODEL_PATH') + "word2vec.model"
     w2v = Word2Vec.load(model_path)
     return w2v
 
