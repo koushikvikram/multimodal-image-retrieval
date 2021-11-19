@@ -25,6 +25,7 @@ jobs:
     - name: Run tests
       env:
         WORD2VEC_MODEL_PATH: ${{ github.workspace }}/model/
+        TESTING_CAPTIONS_DATASET_PATH: ${{ github.workspace }}/datasets/testing/captions/
       run: |
         pytest tests/test*
 
