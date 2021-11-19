@@ -10,7 +10,7 @@ from tests.caption_case import FILE_NAMES, EXCEPTION_FILES, RAW_CAPTIONS, CLEAN_
 @pytest.fixture
 def get_raw_captions(filepath):
     '''returns a list of uncleaned words'''
-    dataset_path = os.environ.get(TESTING_CAPTIONS_DATASET_PATH)
+    dataset_path = os.environ.get('TESTING_CAPTIONS_DATASET_PATH')
     cap = Caption(dataset_path + filepath)
     cap.read()
     return cap.get_data()
@@ -18,7 +18,7 @@ def get_raw_captions(filepath):
 @pytest.fixture
 def get_clean_captions(filepath):
     '''returns a list of cleaned words'''
-    dataset_path = os.environ.get(TESTING_CAPTIONS_DATASET_PATH)
+    dataset_path = os.environ.get('TESTING_CAPTIONS_DATASET_PATH')
     cap = Caption(dataset_path + filepath)
     cap.read(clean=True)
     return cap.get_data()
