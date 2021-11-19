@@ -22,16 +22,17 @@ class Dataset:
         self.word2vec_dataset = []
         self.caption_embeddings_dataset = {}
         self.clean = False
-        self.caption_freq_count = None
     def is_clean(self):
         '''return True if captions were cleaned, else False'''
         return self.clean
     def read_captions(self, clean=False, min_count=0):
         '''read all caption files'''
-        self.clean = clean
+        if self.caption_path is None:
+            raise ValueError("arg: captions_path is None")
         filepaths = glob.glob(self.captions_path+"*.txt")
         if len(filepaths) == 0:
             raise EmptyDataset("No .txt files found")
+        self.clean = clean
         print(f"Reading captions from directory: {self.captions_path}")
         all_captions = {}
         for path in tqdm(filepaths):
