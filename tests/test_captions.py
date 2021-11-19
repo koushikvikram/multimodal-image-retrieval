@@ -74,4 +74,5 @@ def test_non_existing_file(file_path):
     '''check if exceptions are raised correctly on file not present'''
     dataset_path = os.environ.get('TESTING_CAPTIONS_DATASET_PATH')
     with pytest.raises(FileNotFoundError):
-        Caption(dataset_path + file_path)
+        cap = Caption(dataset_path + file_path)
+        cap.read()
