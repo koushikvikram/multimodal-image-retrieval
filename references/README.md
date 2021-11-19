@@ -40,6 +40,8 @@
 
 [Open in Streamlit Badge](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)
 
+[Streamlit- Autocomplete Option for st.text_input()](https://discuss.streamlit.io/t/autocomplete-option-for-st-text-input/7371/2)
+
 [How to reference a directory in my repo during a GitHub action build?](https://stackoverflow.com/questions/62395596/how-to-reference-a-directory-in-my-repo-during-a-github-action-build)
 
 [Pytest failing because it can’t find test data](https://github.community/t/pytest-failing-because-it-cant-find-test-data/147162)
