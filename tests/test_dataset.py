@@ -1,3 +1,3 @@
 '''Tests for the Dataset class'''
 
-from src.dataset import Dataset
+from src.dataset import CaptionDataset

@@ -12,6 +12,7 @@ MODEL_PATH = os.environ.get('WORD2VEC_MODEL_PATH') + "word2vec.model"
 with open(MODEL_PATH, "rb") as file:
     model = pickle.load(file)
 
+
 def compute_embedding(words: List[str]):
     '''computer and return caption embedding by taking the mean of words
     and normalizing it'''

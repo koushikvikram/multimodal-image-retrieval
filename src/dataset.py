@@ -11,11 +11,12 @@ from src.embedding import compute_embedding
 from src.caption import Caption
 from src.caption import IncorrectFileFormat
 
+
 class EmptyDataset(Exception):
     '''Raise when operation is called on a dataset before it has been created'''
 
 
-class Dataset:
+class CaptionDataset:
     '''Perform operations on Captions Dataset'''
     def __init__(self, captions_path=None):
         self.captions_path = captions_path

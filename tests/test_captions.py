@@ -18,6 +18,7 @@ def get_raw_captions(filepath):
     cap.read()
     return cap.get_data()
 
+
 @pytest.fixture
 def get_clean_captions(filepath):
     '''returns a list of cleaned words'''
@@ -26,11 +27,13 @@ def get_clean_captions(filepath):
     cap.read(clean=True)
     return cap.get_data()
 
+
 @pytest.fixture
 def get_caption_id(filepath):
     '''returns the id of the caption file'''
     cap = Caption(filepath)
     return cap.get_id()
+
 
 @pytest.mark.parametrize(
     "filepath, raw_captions",
@@ -40,6 +43,7 @@ def test_raw_captions(get_raw_captions, raw_captions):
     '''test if captions are read correctly without cleaning'''
     assert get_raw_captions == raw_captions
 
+
 @pytest.mark.parametrize(
     'filepath, clean_captions',
     list(zip(FILE_NAMES, CLEAN_CAPTIONS))
@@ -48,6 +52,7 @@ def test_clean_captions(get_clean_captions, clean_captions):
     '''test if captions are being cleaned'''
     assert get_clean_captions == clean_captions
 
+
 @pytest.mark.parametrize(
     'filepath, caption_id',
     list(zip(FILE_NAMES, FILE_ID))
@@ -55,6 +60,7 @@ def test_clean_captions(get_clean_captions, clean_captions):
 def test_caption_id(get_caption_id, caption_id):
     '''check if the caption file's ID is correctly extracted'''
     assert get_caption_id == caption_id
+
 
 @pytest.mark.parametrize(
     'file_path',
@@ -66,6 +72,7 @@ def test_incorrect_file_format(file_path):
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
         Caption(dataset_path + file_path)
     assert str(exceptioninfo.value) == "Please provide a file with .txt extension"
+
 
 @pytest.mark.parametrize(
     'file_path',

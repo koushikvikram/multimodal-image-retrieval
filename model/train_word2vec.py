@@ -2,7 +2,7 @@
 
 from gensim.models import Word2Vec
 
-from src.dataset import Dataset
+from src.dataset import CaptionDataset
 import config.word2vec as wv_cfg
 import config.dataset as ds_cfg
 
@@ -11,7 +11,7 @@ def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
     '''Make a word2vec dataset from txt caption files.
     Save clean high frequency captions and the word2vec dataset'''
     # make captions dataset
-    dataset = Dataset(
+    dataset = CaptionDataset(
         captions_path=captions_path,
         )
     # read captions, clean it and drop words with count < 5
@@ -23,6 +23,7 @@ def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
     # save word2vec dataset
     dataset.write_word2vec_dataset(word2vec_checkpoint)
     return dataset
+
 
 def make_word2vec_model(word2vec_dataset: Dataset, checkpoint, format='pickle'):
     '''train word2vec and save to disk'''

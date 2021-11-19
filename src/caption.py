@@ -10,6 +10,7 @@ from nltk.tokenize import word_tokenize
 
 nltk.download('punkt')
 
+
 class IncorrectFileFormat(Exception):
     '''Raise when file with wrong extension is given as input'''
 
