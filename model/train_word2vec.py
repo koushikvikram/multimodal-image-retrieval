@@ -13,7 +13,6 @@ def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
     # make captions dataset
     dataset = Dataset(
         captions_path=captions_path,
-        images_path=""
         )
     # read captions, clean it and drop words with count < 5
     dataset.read_captions(clean=True, min_count=5)
