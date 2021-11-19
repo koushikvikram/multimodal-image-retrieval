@@ -51,7 +51,6 @@ class Caption:
             self.__set_data(words)
     def get_id(self):
         '''get caption's ID, present in filename'''
-        print("Getting Caption ID ...")
         filename = self._fpath.split("/")[-1]
         caption_id = filename.split(".")[0]
         return caption_id
