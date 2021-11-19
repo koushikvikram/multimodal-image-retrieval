@@ -1,4 +1,4 @@
-'''behavioral and functional tests for the word2vec model'''
+'''behavioral and parameter tests for the word2vec model'''
 
 import os
 import pytest
