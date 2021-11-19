@@ -2,9 +2,10 @@
 
 import os
 import pytest
+from src.caption import IncorrectFileFormat
 
 from src.dataset import Caption
-from tests.caption_case import FILE_NAMES, EXCEPTION_FILES, RAW_CAPTIONS, CLEAN_CAPTIONS, FILE_ID
+from tests.caption_case import FILE_NAMES, INCORRECT_EXT_FILES, NON_EXISTING_FILES, RAW_CAPTIONS, CLEAN_CAPTIONS, FILE_ID
 
 
 @pytest.fixture
@@ -36,3 +37,39 @@ def get_caption_id(filepath):
 def test_raw_captions(get_raw_captions, raw_captions):
     '''test if captions are read correctly without cleaning'''
     assert get_raw_captions == raw_captions
+
+@pytest.mark.parametrize(
+    'filepath, clean_captions',
+    list(zip(FILE_NAMES, CLEAN_CAPTIONS))
+)
+def test_clean_captions(get_clean_captions, clean_captions):
+    '''test if captions are being cleaned'''
+    assert get_clean_captions == clean_captions
+
+@pytest.mark.parametrize(
+    'filepath, caption_id',
+    list(zip(FILE_NAMES, FILE_ID))
+)
+def test_caption_id(get_caption_id, caption_id):
+    '''check if the caption file's ID is correctly extracted'''
+    assert get_caption_id == caption_id
+
+@pytest.mark.parametrize(
+    'filepath',
+    INCORRECT_EXT_FILES
+)
+def test_incorrect_file_format(get_raw_captions):
+    '''check if exceptions are raised correctly on wrong file formats 
+    and files without extensions'''
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        get_raw_captions
+    assert str(exceptioninfo.value) == "Please provide a file with .txt extension"
+
+@pytest.mark.parametrize(
+    'filepath',
+    NON_EXISTING_FILES
+)
+def test_non_existing_file(get_raw_captions):
+    '''check if exceptions are raised correctly on file not present'''
+    with pytest.raises(FileNotFoundError):
+        get_raw_captions

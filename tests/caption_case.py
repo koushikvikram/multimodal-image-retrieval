@@ -17,10 +17,13 @@ FILE_NAMES = [
     'with_special_characters.txt',
     ]
 
-EXCEPTION_FILES = [
+INCORRECT_EXT_FILES = [
     'no_file_extension',
-    'no_such_file.txt',
     'non_txt.json',
+]
+
+NON_EXISTING_FILES = [
+    'no_such_file.txt',
 ]
 
 RAW_CAPTIONS = [
