@@ -45,13 +45,13 @@ def make_word2vec_model(word2vec_dataset: Dataset, checkpoint, format='pickle'):
 
 
 if __name__ == "__main__":
-    clean_captions_checkpoint = ds_cfg.PROCESSED_CAPTIONS_PATH + \
+    CLEAN_CAPTIONS_CHECKPOINT = ds_cfg.PROCESSED_CAPTIONS_PATH + \
         "cleaned" + "/" + "clean_captions_min_count_5.pkl"
-    word2vec_dataset_checkpoint = ds_cfg.PROCESSED_CAPTIONS_PATH + \
+    WORD2VEC_DATASET_CHECKPOINT = ds_cfg.PROCESSED_CAPTIONS_PATH + \
         "word2vec" + "/" + "word2vec_dataset.pkl"
-    word2vec_model_checkpoint = "word2vec.model"
-    w2v_dataset = make_dataset(
+    WORD2VEC_MODEL_CHECKPOINT = "word2vec.model"
+    W2V_DATASET = make_dataset(
         ds_cfg.CAPTIONS_PATH,
-        clean_captions_checkpoint,
-        word2vec_dataset_checkpoint)
-    make_word2vec_model(w2v_dataset, word2vec_model_checkpoint)
+        CLEAN_CAPTIONS_CHECKPOINT,
+        WORD2VEC_DATASET_CHECKPOINT)
+    make_word2vec_model(W2V_DATASET, WORD2VEC_MODEL_CHECKPOINT)

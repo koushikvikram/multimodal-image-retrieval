@@ -18,7 +18,8 @@ def split_and_write(processed_captions_filepath, checkpoint_dir):
         )
 
 if __name__ == "__main__":
-    f_name = "clean_captions_min_count_5.pkl"
-    captions_filepath = ds_cfg.PROCESSED_CAPTIONS_PATH + "cleaned/" + f_name
-    save_dir = ds_cfg.PROCESSED_CAPTIONS_PATH + "embeddings/"
-    split_and_write(captions_filepath, save_dir)
+    FILE_NAME = "clean_captions_min_count_5.pkl"
+    CAPTIONS_FILEPATH = ds_cfg.PROCESSED_CAPTIONS_PATH + \
+        "cleaned/" + FILE_NAME
+    SAVE_DIR = ds_cfg.PROCESSED_CAPTIONS_PATH + "embeddings/"
+    split_and_write(CAPTIONS_FILEPATH, SAVE_DIR)

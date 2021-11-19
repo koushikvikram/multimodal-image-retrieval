@@ -27,7 +27,7 @@ class Dataset:
         return self.clean
     def read_captions(self, clean=False, min_count=0):
         '''read all caption files'''
-        if self.caption_path is None:
+        if self.captions_path is None:
             raise ValueError("arg: captions_path is None")
         filepaths = glob.glob(self.captions_path+"*.txt")
         if len(filepaths) == 0:
@@ -131,7 +131,7 @@ class Dataset:
         if train+val+test != 1.0:
             raise ValueError("Specify train, val and test to add up to 1.0")
         if len(dataset) == 0:
-            raise EmptyDataset("{} dataset is empty.".format(ds_type))
+            raise EmptyDataset(f"{ds_type} dataset is empty.")
         dataset_keys = list(dataset.keys())
         if shuffle:
             random.shuffle(dataset_keys)
@@ -151,9 +151,9 @@ class Dataset:
         splits = {"train": train_set, "val": val_set, "test": test_set}
         print(f"Writing splits to directory: {checkpoint_dir}")
         file_path = checkpoint_dir+"{}_{}.pkl"
-        for split_type in splits:
+        for split_type, split_ds in splits.items():
             with open(file_path.format(split_type, ds_type), 'wb') as file:
-                pickle.dump(splits[split_type], file)
+                pickle.dump(split_ds, file)
     def write_captions(self, checkpoint):
         '''write captions (list of words) to checkpoint path'''
         if checkpoint.split(".")[-1] not in ["pkl", "pickle"]:

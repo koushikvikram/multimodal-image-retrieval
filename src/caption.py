@@ -59,7 +59,7 @@ class Caption:
         return self._data
     def __read_raw_text(self):
         '''read txt file as string'''
-        print("Reading caption file: {}".format(self._fpath))
+        print(f"Reading caption file: {self._fpath}")
         with open(self._fpath, 'r', encoding='utf-8') as file:
             text = file.read()
         return text

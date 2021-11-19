@@ -5,7 +5,9 @@ import pytest
 from src.caption import IncorrectFileFormat
 
 from src.caption import Caption
-from tests.caption_case import FILE_NAMES, INCORRECT_EXT_FILES, NON_EXISTING_FILES, RAW_CAPTIONS, CLEAN_CAPTIONS, FILE_ID
+from tests.caption_case import FILE_NAMES, INCORRECT_EXT_FILES
+from tests.caption_case import NON_EXISTING_FILES
+from tests.caption_case import RAW_CAPTIONS, CLEAN_CAPTIONS, FILE_ID
 
 
 @pytest.fixture
@@ -59,8 +61,7 @@ def test_caption_id(get_caption_id, caption_id):
     INCORRECT_EXT_FILES
 )
 def test_incorrect_file_format(file_path):
-    '''check if exceptions are raised correctly on wrong file formats 
-    and files without extensions'''
+    '''check exceptions on wrong file formats and files without extensions'''
     dataset_path = os.environ.get('TESTING_CAPTIONS_DATASET_PATH')
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
         Caption(dataset_path + file_path)
