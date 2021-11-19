@@ -94,8 +94,11 @@ class Dataset:
         if len(self.word2vec_dataset) == 0:
             raise EmptyDataset("Empty dataset. Try calling .make_word2vec_dataset() first")
         return self.word2vec_dataset
-    def split(self, ds_type, train, val, test):
+    def get_split(self, ds_type, train, val, test):
         '''split dataset into train, val and test sets'''
+        raise NotImplementedError
+    def write_split(self, checkpoint_dir):
+        '''write the train, val and test sets to checkpoint_dir directory'''
         raise NotImplementedError
     def write_captions(self, checkpoint):
         '''write captions (list of words) to checkpoint path'''
