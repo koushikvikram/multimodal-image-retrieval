@@ -61,8 +61,9 @@ def test_caption_id(get_caption_id, caption_id):
 def test_incorrect_file_format(file_path):
     '''check if exceptions are raised correctly on wrong file formats 
     and files without extensions'''
+    dataset_path = os.environ.get('TESTING_CAPTIONS_DATASET_PATH')
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
-        Caption(file_path)
+        Caption(dataset_path + file_path)
     assert str(exceptioninfo.value) == "Please provide a file with .txt extension"
 
 @pytest.mark.parametrize(
