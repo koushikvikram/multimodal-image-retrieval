@@ -45,3 +45,7 @@
 [Pytest failing because it can’t find test data](https://github.community/t/pytest-failing-because-it-cant-find-test-data/147162)
 
 [How to pass environment variables to pytest](https://newbedev.com/how-to-pass-environment-variables-to-pytest)
+
+[Pytest - Pass a parameter to a fixture function](https://stackoverflow.com/questions/18011902/pass-a-parameter-to-a-fixture-function)
+
+[How to properly assert that an exception gets raised in pytest?](https://stackoverflow.com/questions/23337471/how-to-properly-assert-that-an-exception-gets-raised-in-pytest)
