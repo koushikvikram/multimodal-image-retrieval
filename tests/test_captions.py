@@ -55,14 +55,14 @@ def test_caption_id(get_caption_id, caption_id):
     assert get_caption_id == caption_id
 
 @pytest.mark.parametrize(
-    'filepath',
+    'file_path',
     INCORRECT_EXT_FILES
 )
-def test_incorrect_file_format(get_raw_captions):
+def test_incorrect_file_format(file_path):
     '''check if exceptions are raised correctly on wrong file formats 
     and files without extensions'''
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
-        get_raw_captions
+        Caption(file_path)
     assert str(exceptioninfo.value) == "Please provide a file with .txt extension"
 
 @pytest.mark.parametrize(
