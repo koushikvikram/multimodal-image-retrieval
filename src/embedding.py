@@ -15,7 +15,11 @@ with open(MODEL_PATH, "rb") as file:
 def compute_embedding(words: List[str]):
     '''computer and return caption embedding by taking the mean of words
     and normalizing it'''
-    embedding = np.mean(model[words], axis=0)
+    try:
+        embedding = np.mean(model[words], axis=0)
+    except KeyError:
+        print("Hint: Check dataset clean and min_count. Check MODEL_PATH.")
+        raise
     if min(embedding) < 0:
         embedding = embedding - min(embedding)
     if max(embedding) > 0:
