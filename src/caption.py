@@ -51,6 +51,7 @@ class Caption:
             self.__set_data(words)
     def get_id(self):
         '''get caption's ID, present in filename'''
+        print("Getting Caption ID ...")
         filename = self._fpath.split("/")[-1]
         caption_id = filename.split(".")[0]
         return caption_id
@@ -59,6 +60,7 @@ class Caption:
         return self._data
     def __read_raw_text(self):
         '''read txt file as string'''
+        print("Reading caption file: {}".format(self._fpath))
         with open(self._fpath, 'r', encoding='utf-8') as file:
             text = file.read()
         return text
