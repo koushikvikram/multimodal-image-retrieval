@@ -4,7 +4,7 @@ import os
 import pytest
 from src.caption import IncorrectFileFormat
 
-from src.dataset import Caption
+from src.caption import Caption
 from tests.caption_case import FILE_NAMES, INCORRECT_EXT_FILES, NON_EXISTING_FILES, RAW_CAPTIONS, CLEAN_CAPTIONS, FILE_ID
 
 
