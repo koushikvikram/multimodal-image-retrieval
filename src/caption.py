@@ -10,10 +10,15 @@ from nltk.tokenize import word_tokenize
 
 nltk.download('punkt')
 
+class IncorrectFileFormat(Exception):
+    '''Raise when file with wrong extension is given as input'''
+
 
 class Caption:
     '''Perform operations on individual caption textfiles'''
     def __init__(self, filepath: str):
+        if filepath.split(".")[-1] != "txt":
+            raise IncorrectFileFormat("Please provide a file with .txt extension")
         self._fpath = filepath
         self._data = []
         self._id = self.get_id()
