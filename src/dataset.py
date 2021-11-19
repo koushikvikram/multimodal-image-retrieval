@@ -4,6 +4,7 @@ import glob
 from collections import Counter
 import pickle
 import random
+from math import ceil
 from tqdm import tqdm
 
 from src.embedding import compute_embedding
@@ -136,9 +137,9 @@ class Dataset:
         if shuffle:
             random.shuffle(dataset_keys)
         # calculate training and validation set ending index
-        train_end_index = int(len(dataset_keys)*train)
-        val_end_index = train_end_index + int(len(dataset_keys)*val)
-        test_end_index = max(val_end_index+int(len(dataset_keys)*test), len(dataset_keys))
+        train_end_index = ceil(len(dataset_keys)*train)
+        val_end_index = train_end_index + ceil(len(dataset_keys)*val)
+        test_end_index = max(val_end_index+ceil(len(dataset_keys)*test), len(dataset_keys))
         # generate train, val and test sets
         train_set = {id: dataset[id] for id in tqdm(dataset_keys[:train_end_index])}
         val_set = {id: dataset[id] for id in tqdm(dataset_keys[train_end_index:val_end_index])}
