@@ -77,3 +77,7 @@ def test_caption_dataset_clean_min_count_read(read_caption_dataset_clean_min_cou
 def test_caption_dataset_clean_min_count_3_read(read_caption_dataset_clean_min_count_3):
     '''test if dataset is clean with only words with count >= 3'''
     assert read_caption_dataset_clean_min_count_3.get_captions() == {}
+
+def test_is_clean_result(read_caption_dataset_clean):
+    '''test if .is_clean() returns True when clean=True is set'''
+    assert read_caption_dataset_clean.is_clean() == True
