@@ -16,7 +16,7 @@ class EmptyDataset(Exception):
 
 class Dataset:
     '''Perform operations on Captions Dataset'''
-    def __init__(self, captions_path: str):
+    def __init__(self, captions_path=None):
         self.captions_path = captions_path
         self.captions_dataset = {}
         self.word2vec_dataset = []
@@ -92,7 +92,7 @@ class Dataset:
             raise EmptyDataset("Captions dataset is empty.")
         print("Making embeddings ...")
         embeddings_dataset = {}
-        for caption_id, words in all_captions:
+        for caption_id, words in tqdm(all_captions.items()):
             embeddings_dataset[caption_id] = compute_embedding(words)
         self.caption_embeddings_dataset = embeddings_dataset
     def make_word2vec_dataset(self):
@@ -104,7 +104,7 @@ class Dataset:
             raise EmptyDataset('Captions dataset is empty')
         print("Making Word2Vec dataset ...")
         word2vec_dataset = []
-        for words in all_captions.values():
+        for words in tqdm(all_captions.values()):
             word2vec_dataset.append(list(words))
         self.word2vec_dataset = word2vec_dataset
     def get_captions(self):
@@ -127,6 +127,8 @@ class Dataset:
             dataset = self.get_caption_embeddings()
         else:
             raise ValueError("ds_type should either be 'captions' or 'embeddings'")
+        if train+val+test != 1.0:
+            raise ValueError("Specify train, val and test to add up to 1.0")
         if len(dataset) == 0:
             raise EmptyDataset("{} dataset is empty.".format(ds_type))
         dataset_keys = list(dataset.keys())
@@ -137,15 +139,15 @@ class Dataset:
         val_end_index = train_end_index + int(len(dataset_keys)*val)
         test_end_index = max(val_end_index+int(len(dataset_keys)*test), len(dataset_keys))
         # generate train, val and test sets
-        train_set = {id: dataset[id] for id in dataset_keys[:train_end_index]}
-        val_set = {id: dataset[id] for id in dataset_keys[train_end_index:val_end_index]}
-        test_set = {id: dataset[id] for id in dataset_keys[val_end_index:test_end_index]}
+        train_set = {id: dataset[id] for id in tqdm(dataset_keys[:train_end_index])}
+        val_set = {id: dataset[id] for id in tqdm(dataset_keys[train_end_index:val_end_index])}
+        test_set = {id: dataset[id] for id in tqdm(dataset_keys[val_end_index:test_end_index])}
         # return train, val and test sets
         return train_set, val_set, test_set
     def write_split(self, ds_type, train, val, test, checkpoint_dir, shuffle=False):
         '''write the train, val and test sets to checkpoint_dir directory'''
         train_set, val_set, test_set = self.get_split(ds_type, train, val, test, shuffle)
-        splits = {"train": train_set, "val": val_set, "test": test}
+        splits = {"train": train_set, "val": val_set, "test": test_set}
         print(f"Writing splits to directory: {checkpoint_dir}")
         file_path = checkpoint_dir+"{}_{}.pkl"
         for split_type in splits:
