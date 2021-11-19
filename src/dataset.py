@@ -6,14 +6,10 @@ import pickle
 from tqdm import tqdm
 
 from src.caption import Caption
-
+from src.caption import IncorrectFileFormat
 
 class EmptyDataset(Exception):
     '''Raise when operation is called on a dataset before it has been created'''
-
-
-class IncorrectFileFormat(Exception):
-    '''Raise when file with wrong extension is given as input'''
 
 
 class Dataset:
