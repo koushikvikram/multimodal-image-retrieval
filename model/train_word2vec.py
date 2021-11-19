@@ -25,7 +25,7 @@ def make_dataset(captions_path, captions_checkpoint, word2vec_checkpoint):
     dataset.write_word2vec_dataset(word2vec_checkpoint)
     return dataset
 
-def make_word2vec_model(word2vec_dataset: Dataset, checkpoint):
+def make_word2vec_model(word2vec_dataset: Dataset, checkpoint, format='pickle'):
     '''train word2vec and save to disk'''
     # get word2vec dataset
     word2vec_ds = word2vec_dataset.get_word2vec_dataset()
@@ -38,9 +38,11 @@ def make_word2vec_model(word2vec_dataset: Dataset, checkpoint):
         workers=wv_cfg.N_CORES,
         iter=wv_cfg.EPOCHS,
         window=wv_cfg.WINDOW)
-
     # save the trained model
-    model.wv.save_word2vec_format(checkpoint)
+    if format == "pickle":
+        model.save(checkpoint)
+    elif format == "word2vec":
+        model.wv.save_word2vec_format(checkpoint)
 
 
 if __name__ == "__main__":
