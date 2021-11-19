@@ -5,6 +5,7 @@ from collections import Counter
 import pickle
 from tqdm import tqdm
 
+from src.embedding import compute_embedding
 from src.caption import Caption
 from src.caption import IncorrectFileFormat
 
@@ -72,8 +73,22 @@ class Dataset:
             raise IncorrectFileFormat("dict value is not List[str]: Possibly incorrect pickle file")
         self.__set_captions(all_captions)
     def read_caption_embeddings_checkpoint(self, checkpoint):
-        '''read caption embeddings files'''
-        raise NotImplementedError
+        '''read previously stored caption embeddings .pkl files from checkpoint path'''
+        try:
+            with open(checkpoint, 'rb') as file:
+                all_caption_embeddings = pickle.load(file)
+        except:
+            raise IncorrectFileFormat("Please specify the correct path to pickle file")
+        if not isinstance(list(all_caption_embeddings.values())[0][0], float):
+            raise IncorrectFileFormat("dict value is not List[float]: Possibly incorrect pickle file")
+        self.caption_embeddings_dataset = all_caption_embeddings
+    def make_caption_embeddings(self):
+        '''make a single embedding for each caption'''
+        all_captions = self.get_captions()
+        embeddings_dataset = {}
+        for caption_id, words in all_captions:
+            embeddings_dataset[caption_id] = compute_embedding(words)
+        self.caption_embeddings_dataset = embeddings_dataset
     def make_word2vec_dataset(self):
         '''make captions dataset for training word2vec'''
         # check if high frequency dataset has already been created
@@ -84,11 +99,11 @@ class Dataset:
             word2vec_dataset.append(list(words))
         self.word2vec_dataset = word2vec_dataset
     def get_captions(self):
-        '''get words list for each caption along with their id'''
+        '''return words list for each caption along with their id'''
         return self.captions_dataset
-    def get_caption_embeddings(self, model, ds_type):
-        '''get a single vector representation from word2vec for each caption'''
-        raise NotImplementedError
+    def get_caption_embeddings(self, model):
+        '''return embeddings for each caption along with their id'''
+        return self.caption_embeddings_dataset
     def get_word2vec_dataset(self):
         '''returns a word2vec dataset'''
         if len(self.word2vec_dataset) == 0:
@@ -111,7 +126,13 @@ class Dataset:
             pickle.dump(all_captions, file)
     def write_caption_embeddings(self, checkpoint):
         '''write caption embeddings to checkpoint path'''
-        raise NotImplementedError
+        if checkpoint.split(".")[-1] not in ["pkl", "pickle"]:
+            raise IncorrectFileFormat("checkpoint should end in .pkl or .pickle")
+        all_caption_embeddings = self.get_caption_embeddings()
+        if len(all_caption_embeddings) == 0:
+            raise EmptyDataset("Caption Embeddings Dataset is empty.")
+        with open(checkpoint, "wb") as file:
+            pickle.dump(all_caption_embeddings, file)
     def write_word2vec_dataset(self, checkpoint):
         '''write Word2Vec dataset to checkpoint path'''
         if checkpoint.split(".")[-1] not in ["pkl", "pickle"]:
