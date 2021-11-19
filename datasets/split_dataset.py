@@ -16,7 +16,7 @@ def split_and_write(processed_captions_filepath, checkpoint_dir):
         test=0.15,
         checkpoint_dir=checkpoint_dir
         )
-        
+
 
 if __name__ == "__main__":
     FILE_NAME = "clean_captions_min_count_5.pkl"
