@@ -6,6 +6,10 @@
 
 A deep learning application to retrieve images by searching with text
 
+## Development Roadmap
+
+Coming Soon!
+
 ## Dataset
 
 Download the InstaNY100K dataset from this [Google Drive link](https://drive.google.com/file/d/1blGgEOlrHrM0-NAQxYVRwMlfiHDvVHXb/view?usp=sharing)
