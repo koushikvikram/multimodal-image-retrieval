@@ -95,5 +95,5 @@ def test_is_clean_result(read_caption_dataset_clean):
 def test_read_empty_dataset(read_empty_dataset):
     '''test if EmptyDataset Exception is raised when calling .read_captions()'''
     with pytest.raises(EmptyDataset) as exceptioninfo:
-        read_empty_dataset.get_captions()
+        read_empty_dataset.read_captions()
     assert str(exceptioninfo.value) == "No .txt files found"
