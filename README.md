@@ -6,7 +6,7 @@
 
 A deep learning application to retrieve images by searching with text
 
-## Project Roadmap
+## Project Workflow
 
 Coming Soon!
 
