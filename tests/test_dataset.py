@@ -261,7 +261,7 @@ def test_write_empty_captions(read_caption_dataset_clean_min_count_3):
 def test_write_captions_incorrect(read_caption_dataset_clean):
     '''test if IncorrectFileFormat is raised'''
     file_name = 'captions.txt'
-    file_path = os.environ.get('CAPTION_READ_PATH')
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
         read_caption_dataset_clean.write_captions(file_path+file_name)
     assert str(exceptioninfo.value) == "checkpoint should end in .pkl or .pickle"
