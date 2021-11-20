@@ -287,5 +287,62 @@ def test_write_embeddings_incorrect(read_caption_dataset_clean):
     assert str(exceptioninfo.value) == "checkpoint should end in .pkl or .pickle"
 
 
-# def test_read_captions_checkpoint(read_caption_dataset_clean):
-#     '''test if captions checkpoint is correctly read'''
+def test_read_captions_checkpoint(read_caption_dataset_unclean):
+    '''test if captions checkpoint is correctly read'''
+    file_name = "captions.pkl"
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    read_caption_dataset_unclean.read_captions_checkpoint(file_path+file_name)
+    assert read_caption_dataset_unclean.get_captions() == CLEAN_READ_RESULT
+
+
+def test_read_captions_incorrect_path(read_caption_dataset_clean):
+    '''test if IncorrectFileFormat is raised for incorrect extension'''
+    file_name = "captions.txt"
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        read_caption_dataset_clean.read_captions_checkpoint(file_path+file_name)
+    assert str(exceptioninfo.value) == "Please specify the correct path to pickle file"
+
+
+def test_read_captions_incorrect_embeddings(read_caption_dataset_clean):
+    '''test if IncorrectFileFormat is raised for embeddings pickle file'''
+    file_name = "embeddings.pkl"
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        read_caption_dataset_clean.read_captions_checkpoint(file_path+file_name)
+    assert str(exceptioninfo.value) == "dict value is not List[str]: Possibly incorrect pickle file"
+
+
+def test_read_embeddings_checkpoint(read_caption_dataset_clean):
+    '''test if embeddings checkpoint is correctly read'''
+    file_name = "embeddings.pkl"
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    read_caption_dataset_clean.read_caption_embeddings_checkpoint(file_path+file_name)
+    embeddings_1 = read_caption_dataset_clean.get_caption_embeddings()['000001']
+    expected_embeddings_1 = CLEAN_EMBEDDINGS_RESULT['000001']
+    embeddings_2 = read_caption_dataset_clean.get_caption_embeddings()['000002']
+    expected_embeddings_2 = CLEAN_EMBEDDINGS_RESULT['000002']
+    embeddings_3 = read_caption_dataset_clean.get_caption_embeddings()['000003']
+    expected_embeddings_3 = CLEAN_EMBEDDINGS_RESULT['000003']
+    match_1 = (embeddings_1 == expected_embeddings_1).all()
+    match_2 = (embeddings_2 == expected_embeddings_2).all()
+    match_3 = (embeddings_3 == expected_embeddings_3).all()
+    assert match_1 and match_2 and match_3
+
+
+def test_read_embeddings_incorrect_path(read_caption_dataset_clean):
+    '''test if IncorrectFileFormat is raised for incorrect extension'''
+    file_name = "embeddings.txt"
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        read_caption_dataset_clean.read_caption_embeddings_checkpoint(file_path+file_name)
+    assert str(exceptioninfo.value) == "Please specify the correct path to pickle file"
+
+
+def test_read_embeddings_incorrect_captions(read_caption_dataset_clean):
+    '''test if IncorrectFileFormat is raised for captions pickle file'''
+    file_name = "captions.pkl"
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        read_caption_dataset_clean.read_caption_embeddings_checkpoint(file_path+file_name)
+    assert str(exceptioninfo.value) == "dict value is not List[float]: Possibly incorrect pickle file"

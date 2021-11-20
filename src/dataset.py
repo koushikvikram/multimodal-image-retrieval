@@ -88,7 +88,8 @@ class CaptionDataset:
             embeddings_dataset[caption_id] = compute_embedding(words)
         self.caption_embeddings_dataset = embeddings_dataset
     def read_caption_embeddings_checkpoint(self, checkpoint):
-        '''read previously stored caption embeddings .pkl files from checkpoint path'''
+        '''read previously stored caption embeddings .pkl files from checkpoint path.
+        use only if you want to split embeddings into train, val and test'''
         print(f"Reading caption embeddings from checkpoint: {checkpoint}")
         try:
             with open(checkpoint, 'rb') as file:
@@ -96,7 +97,7 @@ class CaptionDataset:
         except:
             raise IncorrectFileFormat("Please specify the correct path to pickle file")
         if not isinstance(list(all_caption_embeddings.values())[0][0], float):
-            raise IncorrectFileFormat("dict value not List[float]: Possibly incorrect file")
+            raise IncorrectFileFormat("dict value not List[float]: Possibly incorrect pickle file")
         self.caption_embeddings_dataset = all_caption_embeddings
     def make_word2vec_dataset(self):
         '''make captions dataset for training word2vec'''
