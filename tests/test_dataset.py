@@ -254,7 +254,7 @@ def test_write_captions(read_caption_dataset_clean):
     captions_ds = read_caption_dataset_clean.get_captions()
     file_name = 'captions.pkl'
     file_path = os.environ.get('CHECKPOINT_WRITE_PATH')
-    read_caption_dataset_clean.write_captions(file_name + file_path)
+    read_caption_dataset_clean.write_captions(file_path+file_name)
     file_present = os.path.isfile(file_path+file_name)
     read_caption_dataset_clean.read_captions_checkpoint(file_path+file_name)
     checkpoint_captions = read_caption_dataset_clean.get_captions()
