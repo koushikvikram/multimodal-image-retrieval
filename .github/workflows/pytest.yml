@@ -22,9 +22,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         pip install -r requirements.txt
-    - name: Clean up files from last run
-      run: |
-        rm -rf ${{ github.workspace }}/datasets/testing/checkpoint_write/
     - name: Run tests
       env:
         WORD2VEC_MODEL_PATH: ${{ github.workspace }}/model/
