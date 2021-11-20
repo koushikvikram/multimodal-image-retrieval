@@ -238,7 +238,7 @@ def test_split_embeddings(read_caption_dataset_clean):
     read_caption_dataset_clean.make_caption_embeddings()
     embeddings_ds = read_caption_dataset_clean.get_caption_embeddings()
     train_ds, val_ds, test_ds = read_caption_dataset_clean.get_split(
-        ds_type="captions",
+        ds_type="embeddings",
         train=0.33,
         val=0.33,
         test=0.34,
