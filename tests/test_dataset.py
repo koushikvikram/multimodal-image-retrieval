@@ -8,6 +8,7 @@ from tests.captiondataset_case import UNCLEAN_READ_RESULT, CLEAN_READ_RESULT
 from tests.captiondataset_case import UNCLEAN_MIN_COUNT_3_RESULT
 from tests.captiondataset_case import CLEAN_MIN_COUNT_2_RESULT
 from tests.captiondataset_case import CLEAN_EMBEDDINGS_RESULT
+from tests.captiondataset_case import WORD2VEC_DATASET_RESULT
 
 
 @pytest.fixture
@@ -126,3 +127,23 @@ def test_caption_embeddings_key_error(read_caption_dataset_unclean):
     '''test if KeyError is raised when stop words are present'''
     with pytest.raises(KeyError):
         read_caption_dataset_unclean.make_caption_embeddings()
+
+
+def test_make_empty_word2vec_dataset(read_caption_dataset_clean_min_count_3):
+    '''test if EmptyDataset is raised'''
+    with pytest.raises(EmptyDataset) as exceptioninfo:
+        read_caption_dataset_clean_min_count_3.make_word2vec_dataset()
+    assert str(exceptioninfo.value) == "Captions dataset is empty."
+
+
+def test_get_empty_word2vec_dataset(read_caption_dataset_clean):
+    '''test if EmptyDataset is raised if .get_word2vec_dataset() called before make'''
+    with pytest.raises(EmptyDataset) as exceptioninfo:
+        read_caption_dataset_clean.get_word2vec_dataset()
+    assert str(exceptioninfo.value) == "Empty dataset. Try calling .make_word2vec_dataset() first."
+
+
+def test_word2vec_dataset_success(read_caption_dataset_clean):
+    '''test if word2vec dataset was made correctly'''
+    read_caption_dataset_clean.make_word2vec_dataset()
+    assert read_caption_dataset_clean.get_word2vec_dataset() == WORD2VEC_DATASET_RESULT

@@ -134,3 +134,18 @@ CLEAN_EMBEDDINGS_RESULT = {
         0.16668725, 0.3400978 , 0.35747498, 0.5571357 , 0.45070672],
        dtype=np.float32)
        }
+
+WORD2VEC_DATASET_RESULT = [
+    [
+        'toronto',
+        'toronto',
+        'montreal',
+    ],
+    [
+        'montreal',
+    ],
+    [
+        'coffee',
+        'coffee',
+    ]
+]

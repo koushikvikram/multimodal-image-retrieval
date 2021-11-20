@@ -104,7 +104,7 @@ class CaptionDataset:
         # and if high frequency dataset was created with same min_count
         all_captions = self.get_captions()
         if len(all_captions) == 0:
-            raise EmptyDataset('Captions dataset is empty')
+            raise EmptyDataset('Captions dataset is empty.')
         print("Making Word2Vec dataset ...")
         word2vec_dataset = []
         for words in tqdm(all_captions.values()):
@@ -119,7 +119,7 @@ class CaptionDataset:
     def get_word2vec_dataset(self):
         '''returns a word2vec dataset'''
         if len(self.word2vec_dataset) == 0:
-            raise EmptyDataset("Empty dataset. Try calling .make_word2vec_dataset() first")
+            raise EmptyDataset("Empty dataset. Try calling .make_word2vec_dataset() first.")
         return self.word2vec_dataset
     def get_split(self, ds_type, train, val, test, shuffle=False):
         '''split dataset into train, val and test sets'''
@@ -172,7 +172,7 @@ class CaptionDataset:
             raise IncorrectFileFormat("checkpoint should end in .pkl or .pickle")
         all_caption_embeddings = self.get_caption_embeddings()
         if len(all_caption_embeddings) == 0:
-            raise EmptyDataset("Caption Embeddings Dataset is empty.")
+            raise EmptyDataset("Caption Embeddings dataset is empty.")
         print(f"Writing Caption Embeddings Dataset to checkpoint: {checkpoint}")
         with open(checkpoint, "wb") as file:
             pickle.dump(all_caption_embeddings, file)
