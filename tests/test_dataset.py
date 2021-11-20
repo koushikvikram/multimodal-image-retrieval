@@ -147,3 +147,51 @@ def test_word2vec_dataset_success(read_caption_dataset_clean):
     '''test if word2vec dataset was made correctly'''
     read_caption_dataset_clean.make_word2vec_dataset()
     assert read_caption_dataset_clean.get_word2vec_dataset() == WORD2VEC_DATASET_RESULT
+
+
+def test_split_greater_than_1(read_caption_dataset_clean):
+    '''test if ValueError is raised when train+val+split > 1.0'''
+    with pytest.raises(ValueError) as exceptioninfo:
+        read_caption_dataset_clean.split(
+            ds_type='captions',
+            train=1.0,
+            val=0.2,
+            test=0.8
+            )
+    assert str(exceptioninfo.value) == "Specify train, val and test to add up to 1.0"
+
+
+def test_split_lesser_than_1(read_caption_dataset_clean):
+    '''test if ValueError is raised when train+val+split < 1.0'''
+    with pytest.raises(ValueError) as exceptioninfo:
+        read_caption_dataset_clean.split(
+            ds_type='captions',
+            train=0.1,
+            val=0.2,
+            test=0.3
+            )
+    assert str(exceptioninfo.value) == "Specify train, val and test to add up to 1.0"
+
+
+def test_split_ds_type_valueerror(read_caption_dataset_clean):
+    '''test if ValueError is raised when ds_type is invalid'''
+    with pytest.raises(ValueError) as exceptioninfo:
+        read_caption_dataset_clean.split(
+            ds_type='word2vec',
+            train=0.8,
+            val=0.05,
+            test=0.15
+            )
+    assert str(exceptioninfo.value) == "ds_type should either be 'captions' or 'embeddings'"
+
+
+def test_split_empty_dataset(read_caption_dataset_clean_min_count_3):
+    '''test if EmptyDataset is raised'''
+    with pytest.raises(ValueError) as exceptioninfo:
+        read_caption_dataset_clean_min_count_3.split(
+            ds_type='captions',
+            train=0.33,
+            val=0.33,
+            test=0.34
+            )
+    assert str(exceptioninfo.value) == "captions dataset is empty."
