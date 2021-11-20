@@ -103,4 +103,26 @@ def test_read_empty_dataset(read_empty_dataset):
 def test_caption_embeddings_success(read_caption_dataset_clean):
     '''test if expected caption embeddings are generated'''
     read_caption_dataset_clean.make_caption_embeddings()
-    assert read_caption_dataset_clean.get_caption_embeddings() == CLEAN_EMBEDDINGS_RESULT
+    embeddings_1 = read_caption_dataset_clean.get_caption_embeddings()['000001']
+    expected_embeddings_1 = CLEAN_EMBEDDINGS_RESULT['000001']
+    embeddings_2 = read_caption_dataset_clean.get_caption_embeddings()['000002']
+    expected_embeddings_2 = CLEAN_EMBEDDINGS_RESULT['000002']
+    embeddings_3 = read_caption_dataset_clean.get_caption_embeddings()['000003']
+    expected_embeddings_3 = CLEAN_EMBEDDINGS_RESULT['000003']
+    match_1 = (embeddings_1 == expected_embeddings_1).all()
+    match_2 = (embeddings_2 == expected_embeddings_2).all()
+    match_3 = (embeddings_3 == expected_embeddings_3).all()
+    assert match_1 and match_2 and match_3
+
+
+def test_caption_embeddings_empty(read_caption_dataset_clean_min_count_3):
+    '''test if EmptyDataset exception is raised'''
+    with pytest.raises(EmptyDataset) as exceptioninfo:
+        read_caption_dataset_clean_min_count_3.make_caption_embeddings()
+    assert str(exceptioninfo.value) == "Captions dataset is empty."
+
+
+def test_caption_embeddings_key_error(read_caption_dataset_unclean):
+    '''test if KeyError is raised when stop words are present'''
+    with pytest.raises(KeyError):
+        read_caption_dataset_unclean.make_caption_embeddings()
