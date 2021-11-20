@@ -77,6 +77,16 @@ class CaptionDataset:
         if not isinstance(list(all_captions.values())[0][0], str):
             raise IncorrectFileFormat("dict value is not List[str]: Possibly incorrect pickle file")
         self.__set_captions(all_captions)
+    def make_caption_embeddings(self):
+        '''make a single embedding for each caption'''
+        all_captions = self.get_captions()
+        if len(all_captions) == 0:
+            raise EmptyDataset("Captions dataset is empty.")
+        print("Making embeddings ...")
+        embeddings_dataset = {}
+        for caption_id, words in tqdm(all_captions.items()):
+            embeddings_dataset[caption_id] = compute_embedding(words)
+        self.caption_embeddings_dataset = embeddings_dataset
     def read_caption_embeddings_checkpoint(self, checkpoint):
         '''read previously stored caption embeddings .pkl files from checkpoint path'''
         print(f"Reading caption embeddings from checkpoint: {checkpoint}")
@@ -88,16 +98,6 @@ class CaptionDataset:
         if not isinstance(list(all_caption_embeddings.values())[0][0], float):
             raise IncorrectFileFormat("dict value not List[float]: Possibly incorrect file")
         self.caption_embeddings_dataset = all_caption_embeddings
-    def make_caption_embeddings(self):
-        '''make a single embedding for each caption'''
-        all_captions = self.get_captions()
-        if len(all_captions) == 0:
-            raise EmptyDataset("Captions dataset is empty.")
-        print("Making embeddings ...")
-        embeddings_dataset = {}
-        for caption_id, words in tqdm(all_captions.items()):
-            embeddings_dataset[caption_id] = compute_embedding(words)
-        self.caption_embeddings_dataset = embeddings_dataset
     def make_word2vec_dataset(self):
         '''make captions dataset for training word2vec'''
         # check if high frequency dataset has already been created
