@@ -188,12 +188,10 @@ def test_split_ds_type_valueerror(read_caption_dataset_clean):
 def test_split_empty_dataset(read_caption_dataset_clean_min_count_3):
     '''test if EmptyDataset is raised'''
     ds_type="captions"
-    with pytest.raises(ValueError) as exceptioninfo:
+    with pytest.raises(ValueError):
         read_caption_dataset_clean_min_count_3.get_split(
             ds_type=ds_type,
             train=0.33,
             val=0.33,
             test=0.34
             )
-    assert str(exceptioninfo.value) == f"{ds_type} dataset is empty."
-
