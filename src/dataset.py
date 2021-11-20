@@ -7,6 +7,8 @@ import random
 from math import ceil
 from tqdm import tqdm
 
+import numpy as np
+
 from src.embedding import compute_embedding
 from src.caption import Caption
 from src.caption import IncorrectFileFormat
@@ -96,7 +98,7 @@ class CaptionDataset:
                 all_caption_embeddings = pickle.load(file)
         except:
             raise IncorrectFileFormat("Please specify the correct path to pickle file")
-        if not isinstance(list(all_caption_embeddings.values())[0][0], float):
+        if not isinstance(list(all_caption_embeddings.values())[0][0], np.float32):
             raise IncorrectFileFormat("dict value not List[float]: Possibly incorrect pickle file")
         self.caption_embeddings_dataset = all_caption_embeddings
     def make_word2vec_dataset(self):
