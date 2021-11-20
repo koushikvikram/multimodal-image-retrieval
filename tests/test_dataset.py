@@ -6,9 +6,9 @@ import pytest
 from src.dataset import CaptionDataset, EmptyDataset
 from tests.captiondataset_case import UNCLEAN_READ_RESULT, CLEAN_READ_RESULT
 from tests.captiondataset_case import UNCLEAN_MIN_COUNT_3_RESULT
-from tests.captiondataset_case import CLEAN_MIN_COUNT_2_RESULT
 from tests.captiondataset_case import CLEAN_EMBEDDINGS_RESULT
 from tests.captiondataset_case import WORD2VEC_DATASET_RESULT
+from tests.captiondataset_case import CLEAN_SPLIT_NO_SHUFFLE
 
 
 @pytest.fixture
@@ -81,7 +81,7 @@ def test_caption_dataset_unclean_min_count_read(read_caption_dataset_unclean_min
 
 def test_caption_dataset_clean_min_count_read(read_caption_dataset_clean_min_count_2):
     '''test if dataset is clean with only words with count >= 2'''
-    assert read_caption_dataset_clean_min_count_2.get_captions() == CLEAN_MIN_COUNT_2_RESULT
+    assert read_caption_dataset_clean_min_count_2.get_captions() == CLEAN_READ_RESULT
 
 
 def test_caption_dataset_clean_min_count_3_read(read_caption_dataset_clean_min_count_3):
@@ -196,3 +196,54 @@ def test_split_empty_dataset(read_caption_dataset_clean_min_count_3):
             )
     assert str(exceptioninfo.value) == "captions dataset is empty."
 
+
+def test_split_captions(read_caption_dataset_clean):
+    '''test if captions data is correctly split'''
+    assert read_caption_dataset_clean.get_split(
+        ds_type="captions",
+        train=0.33,
+        val=0.33,
+        test=0.34
+        ) == CLEAN_SPLIT_NO_SHUFFLE
+
+
+def test_split_captions_shuffle(read_caption_dataset_clean):
+    '''test if captions data is shuffled and split'''
+    assert read_caption_dataset_clean.get_split(
+        ds_type="captions",
+        train=0.33,
+        val=0.33,
+        test=0.34,
+        ) != read_caption_dataset_clean.get_split(
+            ds_type="captions",
+            train=0.33,
+            val=0.33,
+            test=0.34,
+            shuffle=True
+        )
+
+
+def test_split_captions_only_train(read_caption_dataset_clean):
+    '''test if captions data is correctly split'''
+    assert read_caption_dataset_clean.get_split(
+        ds_type="captions",
+        train=1.0,
+        val=0.0,
+        test=0.0
+        )[0] == CLEAN_READ_RESULT
+
+
+def test_split_embeddings(read_caption_dataset_clean):
+    '''test if embeddings dataset is correctly split'''
+    read_caption_dataset_clean.make_caption_embeddings()
+    embeddings_ds = read_caption_dataset_clean.get_caption_embeddings()
+    train_ds, val_ds, test_ds = read_caption_dataset_clean.get_split(
+        ds_type="captions",
+        train=0.33,
+        val=0.33,
+        test=0.34,
+        )
+    match_train = (train_ds['000001'] == embeddings_ds['000001']).all()
+    match_val = (val_ds['000002'] == val_ds['000002']).all()
+    match_test = (test_ds['000003'] == test_ds['000003']).all()
+    assert match_test and match_val and match_test
