@@ -77,7 +77,7 @@ class CaptionDataset:
         except:
             raise IncorrectFileFormat("Please specify the correct path to pickle file")
         if not isinstance(list(all_captions.values())[0][0], str):
-            raise IncorrectFileFormat("dict value is not List[str]: Possibly incorrect pickle file")
+            raise IncorrectFileFormat("dict value not List[str]: Possibly incorrect pickle file")
         self.__set_captions(all_captions)
     def make_caption_embeddings(self):
         '''make a single embedding for each caption'''
@@ -99,7 +99,7 @@ class CaptionDataset:
         except:
             raise IncorrectFileFormat("Please specify the correct path to pickle file")
         if not isinstance(list(all_caption_embeddings.values())[0][0], np.float32):
-            raise IncorrectFileFormat("dict value not List[float]: Possibly incorrect pickle file")
+            raise IncorrectFileFormat("dict value not np.array[np.float32]: Possibly incorrect pickle file")
         self.caption_embeddings_dataset = all_caption_embeddings
     def make_word2vec_dataset(self):
         '''make captions dataset for training word2vec'''

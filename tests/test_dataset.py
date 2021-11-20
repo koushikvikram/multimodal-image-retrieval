@@ -310,7 +310,7 @@ def test_read_captions_incorrect_embeddings(read_caption_dataset_clean):
     file_path = os.environ.get('CHECKPOINT_READ_PATH')
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
         read_caption_dataset_clean.read_captions_checkpoint(file_path+file_name)
-    assert str(exceptioninfo.value) == "dict value is not List[str]: Possibly incorrect pickle file"
+    assert str(exceptioninfo.value) == "dict value not List[str]: Possibly incorrect pickle file"
 
 
 def test_read_embeddings_checkpoint(read_caption_dataset_clean):
@@ -345,4 +345,4 @@ def test_read_embeddings_incorrect_captions(read_caption_dataset_clean):
     file_path = os.environ.get('CHECKPOINT_READ_PATH')
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
         read_caption_dataset_clean.read_caption_embeddings_checkpoint(file_path+file_name)
-    assert str(exceptioninfo.value) == "dict value is not List[float]: Possibly incorrect pickle file"
+    assert str(exceptioninfo.value) == "dict value not np.array[np.float32]: Possibly incorrect pickle file"
