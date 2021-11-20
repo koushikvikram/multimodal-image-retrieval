@@ -244,6 +244,6 @@ def test_split_embeddings(read_caption_dataset_clean):
         test=0.34,
         )
     match_train = (train_ds['000001'] == embeddings_ds['000001']).all()
-    match_val = (val_ds['000002'] == val_ds['000002']).all()
-    match_test = (test_ds['000003'] == test_ds['000003']).all()
-    assert match_test and match_val and match_test
+    match_val = (val_ds['000002'] == embeddings_ds['000002']).all()
+    match_test = (test_ds['000003'] == embeddings_ds['000003']).all()
+    assert match_train and match_val and match_test
