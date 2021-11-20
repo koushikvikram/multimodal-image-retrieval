@@ -250,32 +250,18 @@ def test_split_embeddings(read_caption_dataset_clean):
     assert match_train and match_val and match_test
 
 
-def test_write_captions(read_caption_dataset_clean):
-    '''test if caption dataset was written'''
-    captions_ds = read_caption_dataset_clean.get_captions()
-    file_path = os.environ.get('CAPTION_CHECKPOINT_PATH')
-    read_caption_dataset_clean.write_captions(file_path)
-    file_present = os.path.isfile(file_path)
-    read_caption_dataset_clean.read_captions_checkpoint(file_path)
-    checkpoint_captions = read_caption_dataset_clean.get_captions()
-    written_correctly = (captions_ds == checkpoint_captions)
-    assert file_present and written_correctly
-
-
 def test_write_empty_captions(read_caption_dataset_clean_min_count_3):
     '''test if EmptyDataset is raised'''
-    file_name = 'captions.pkl'
-    file_path = os.environ.get('CHECKPOINT_WRITE_PATH')
+    file_path = os.environ.get('CAPTION_CHECKPOINT_PATH')
     with pytest.raises(EmptyDataset) as exceptioninfo:
-        read_caption_dataset_clean_min_count_3.write_captions(file_path+file_name)
+        read_caption_dataset_clean_min_count_3.write_captions(file_path)
     assert str(exceptioninfo.value) == "Captions dataset is empty."
 
 
 def test_write_captions_incorrect(read_caption_dataset_clean):
     '''test if IncorrectFileFormat is raised'''
     file_name = 'captions.txt'
-    file_path = os.environ.get('CHECKPOINT_WRITE_PATH')
+    file_path = os.environ.get('CAPTION_READ_PATH')
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
         read_caption_dataset_clean.write_captions(file_path+file_name)
     assert str(exceptioninfo.value) == "checkpoint should end in .pkl or .pickle"
-
