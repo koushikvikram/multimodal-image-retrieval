@@ -3,7 +3,7 @@
 import os
 import pytest
 
-from src.dataset import CaptionDataset
+from src.dataset import CaptionDataset, EmptyDataset
 from tests.captiondataset_case import UNCLEAN_READ_RESULT, CLEAN_READ_RESULT
 from tests.captiondataset_case import UNCLEAN_MIN_COUNT_3_RESULT
 from tests.captiondataset_case import CLEAN_MIN_COUNT_2_RESULT
@@ -54,6 +54,14 @@ def read_caption_dataset_clean_min_count_3():
     return cap_ds
 
 
+@pytest.fixture
+def read_empty_dataset():
+    '''read empty dataset'''
+    dataset_path = os.environ.get('EMPTY_DS_PATH')
+    cap_ds = CaptionDataset(dataset_path)
+    return cap_ds
+
+
 def test_caption_dataset_unclean_read(read_caption_dataset_unclean):
     '''test if dataset was read correctly'''
     assert read_caption_dataset_unclean.get_captions() == UNCLEAN_READ_RESULT
@@ -78,6 +86,14 @@ def test_caption_dataset_clean_min_count_3_read(read_caption_dataset_clean_min_c
     '''test if dataset is clean with only words with count >= 3'''
     assert read_caption_dataset_clean_min_count_3.get_captions() == {}
 
+
 def test_is_clean_result(read_caption_dataset_clean):
     '''test if .is_clean() returns True when clean=True is set'''
     assert read_caption_dataset_clean.is_clean() == True
+
+
+def test_read_empty_dataset(read_empty_dataset):
+    '''test if EmptyDataset Exception is raised when calling .read_captions()'''
+    with pytest.raises(EmptyDataset) as exceptioninfo:
+        read_empty_dataset.get_captions()
+    assert str(exceptioninfo.value) == "No .txt files found"

@@ -27,6 +27,7 @@ jobs:
         WORD2VEC_MODEL_PATH: ${{ github.workspace }}/model/
         TESTING_CAPTIONS_DATASET_PATH: ${{ github.workspace }}/datasets/testing/captions/
         MIN_VIABLE_TESTING_DS_PATH: ${{ github.workspace }}/datasets/testing/minimum_viable_dataset/
+        EMPTY_DS_PATH: ${{ github.workspace }}/datasets/testing/empty_dataset/
       run: |
         pytest tests/test*
 
