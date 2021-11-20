@@ -7,6 +7,7 @@ from src.dataset import CaptionDataset, EmptyDataset
 from tests.captiondataset_case import UNCLEAN_READ_RESULT, CLEAN_READ_RESULT
 from tests.captiondataset_case import UNCLEAN_MIN_COUNT_3_RESULT
 from tests.captiondataset_case import CLEAN_MIN_COUNT_2_RESULT
+from tests.captiondataset_case import CLEAN_EMBEDDINGS_RESULT
 
 
 @pytest.fixture
@@ -60,7 +61,7 @@ def read_empty_dataset():
     dataset_path = os.environ.get('EMPTY_DS_PATH')
     cap_ds = CaptionDataset(dataset_path)
     return cap_ds
-
+    
 
 def test_caption_dataset_unclean_read(read_caption_dataset_unclean):
     '''test if dataset was read correctly'''
@@ -97,3 +98,9 @@ def test_read_empty_dataset(read_empty_dataset):
     with pytest.raises(EmptyDataset) as exceptioninfo:
         read_empty_dataset.read_captions()
     assert str(exceptioninfo.value) == "No .txt files found"
+
+
+def test_caption_embeddings_success(read_caption_dataset_clean):
+    '''test if expected caption embeddings are generated'''
+    read_caption_dataset_clean.make_caption_embeddings()
+    assert read_caption_dataset_clean.get_caption_embeddings() == CLEAN_EMBEDDINGS_RESULT
