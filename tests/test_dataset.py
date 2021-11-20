@@ -265,3 +265,27 @@ def test_write_captions_incorrect(read_caption_dataset_clean):
     with pytest.raises(IncorrectFileFormat) as exceptioninfo:
         read_caption_dataset_clean.write_captions(file_path+file_name)
     assert str(exceptioninfo.value) == "checkpoint should end in .pkl or .pickle"
+
+
+def test_write_embeddings_incorrect(read_caption_dataset_clean):
+    '''test if IncorrectFileFormat is raised'''
+    file_name = 'embeddings.txt'
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    read_caption_dataset_clean.make_caption_embeddings()
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        read_caption_dataset_clean.write_caption_embeddings(file_path+file_name)
+    assert str(exceptioninfo.value) == "checkpoint should end in .pkl or .pickle"
+
+
+def test_write_embeddings_incorrect(read_caption_dataset_clean):
+    '''test if IncorrectFileFormat is raised'''
+    file_name = 'word2vec.txt'
+    file_path = os.environ.get('CHECKPOINT_READ_PATH')
+    read_caption_dataset_clean.make_word2vec_dataset()
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        read_caption_dataset_clean.write_word2vec_dataset(file_path+file_name)
+    assert str(exceptioninfo.value) == "checkpoint should end in .pkl or .pickle"
+
+
+# def test_read_captions_checkpoint(read_caption_dataset_clean):
+#     '''test if captions checkpoint is correctly read'''
