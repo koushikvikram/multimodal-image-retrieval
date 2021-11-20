@@ -4,6 +4,7 @@ import os
 import pytest
 
 from src.dataset import CaptionDataset, EmptyDataset
+from src.caption import IncorrectFileFormat
 from tests.captiondataset_case import UNCLEAN_READ_RESULT, CLEAN_READ_RESULT
 from tests.captiondataset_case import UNCLEAN_MIN_COUNT_3_RESULT
 from tests.captiondataset_case import CLEAN_EMBEDDINGS_RESULT
@@ -260,4 +261,22 @@ def test_write_captions(read_caption_dataset_clean):
     checkpoint_captions = read_caption_dataset_clean.get_captions()
     written_correctly = (captions_ds == checkpoint_captions)
     assert file_present and written_correctly
+
+
+def test_write_empty_captions(read_caption_dataset_clean_min_count_3):
+    '''test if EmptyDataset is raised'''
+    file_name = 'captions.pkl'
+    file_path = os.environ.get('CHECKPOINT_WRITE_PATH')
+    with pytest.raises(EmptyDataset) as exceptioninfo:
+        read_caption_dataset_clean_min_count_3.write_captions(file_path+file_name)
+    assert str(exceptioninfo.value) == "Captions dataset is empty."
+
+
+def test_write_captions_incorrect(read_caption_dataset_clean):
+    '''test if IncorrectFileFormat is raised'''
+    file_name = 'captions.txt'
+    file_path = os.environ.get('CHECKPOINT_WRITE_PATH')
+    with pytest.raises(IncorrectFileFormat) as exceptioninfo:
+        read_caption_dataset_clean.write_captions(file_path+file_name)
+    assert str(exceptioninfo.value) == "checkpoint should end in .pkl or .pickle"
 
