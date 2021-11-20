@@ -253,11 +253,10 @@ def test_split_embeddings(read_caption_dataset_clean):
 def test_write_captions(read_caption_dataset_clean):
     '''test if caption dataset was written'''
     captions_ds = read_caption_dataset_clean.get_captions()
-    file_name = 'captions.pkl'
-    file_path = os.environ.get('CHECKPOINT_WRITE_PATH')
-    read_caption_dataset_clean.write_captions(file_path+file_name)
-    file_present = os.path.isfile(file_path+file_name)
-    read_caption_dataset_clean.read_captions_checkpoint(file_path+file_name)
+    file_path = os.environ.get('CAPTION_CHECKPOINT_PATH')
+    read_caption_dataset_clean.write_captions(file_path)
+    file_present = os.path.isfile(file_path)
+    read_caption_dataset_clean.read_captions_checkpoint(file_path)
     checkpoint_captions = read_caption_dataset_clean.get_captions()
     written_correctly = (captions_ds == checkpoint_captions)
     assert file_present and written_correctly

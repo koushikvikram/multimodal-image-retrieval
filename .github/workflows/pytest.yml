@@ -31,7 +31,7 @@ jobs:
         TESTING_CAPTIONS_DATASET_PATH: ${{ github.workspace }}/datasets/testing/captions/
         MIN_VIABLE_TESTING_DS_PATH: ${{ github.workspace }}/datasets/testing/minimum_viable_dataset/
         EMPTY_DS_PATH: ${{ github.workspace }}/datasets/testing/empty_dataset/
-        CHECKPOINT_WRITE_PATH: ${{ github.workspace }}/datasets/testing/checkpoint_write/
+        CAPTION_CHECKPOINT_PATH: ${{ github.workspace }}/datasets/testing/checkpoint_write/testing.pkl
         CHECKPOINT_READ_PATH: ${{ github.workspace }}/datasets/testing/checkpoint_read/
       run: |
         pytest tests/test*
