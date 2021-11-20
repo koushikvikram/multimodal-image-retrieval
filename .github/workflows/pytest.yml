@@ -22,12 +22,17 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         pip install -r requirements.txt
+    - name: Clean up files from last run
+      run: |
+        rm -rf ${{ github.workspace }}/datasets/testing/checkpoint_write/
     - name: Run tests
       env:
         WORD2VEC_MODEL_PATH: ${{ github.workspace }}/model/
         TESTING_CAPTIONS_DATASET_PATH: ${{ github.workspace }}/datasets/testing/captions/
         MIN_VIABLE_TESTING_DS_PATH: ${{ github.workspace }}/datasets/testing/minimum_viable_dataset/
         EMPTY_DS_PATH: ${{ github.workspace }}/datasets/testing/empty_dataset/
+        CHECKPOINT_WRITE_PATH: ${{ github.workspace }}/datasets/testing/checkpoint_write/
+        CHECKPOINT_READ_PATH: ${{ github.workspace }}/datasets/testing/checkpoint_read/
       run: |
         pytest tests/test*
 
