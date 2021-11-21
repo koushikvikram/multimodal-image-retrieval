@@ -260,4 +260,3 @@ class TestImagesDataset(Dataset):
         if self.image_transforms:
             image = self.image_transforms(image)
         return image_name, image
-
