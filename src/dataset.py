@@ -8,6 +8,11 @@ from math import ceil
 from tqdm import tqdm
 
 import numpy as np
+from PIL import Image
+
+import torch
+from torch.utils.data import Dataset
+import torchvision.transforms as transforms
 
 from src.embedding import compute_embedding
 from src.caption import Caption
@@ -192,3 +197,67 @@ class CaptionDataset:
     def __set_captions(self, captions):
         '''set self.captions_dataset to captions'''
         self.captions_dataset = captions
+
+
+class CaptionEmbeddingsDataset(Dataset):
+    '''PyTorch Dataset for reading train and val images with their embeddings
+    from pkl file'''
+    def __init__(self, embeddings_file_path, image_dataset_path):
+        with open(embeddings_file_path, 'rb') as file:
+            self.caption_embeddings = list(pickle.load(file).items())
+        self.image_dataset_path = image_dataset_path
+        self.image_transforms = transforms.Compose([
+            transforms.RandomHorizontalFlip(),
+            # transforms.Resize(256), # When crop needs to be more centered
+            transforms.RandomCrop(224), # ResNet50 input dim is 3x224x224
+            transforms.ToTensor(),
+            transforms.Normalize(
+                mean=[0.485, 0.456, 0.406],
+                std=[0.229, 0.224, 0.225],
+            ) # ImageNet Normalization
+        ])
+    def __len__(self):
+        '''return length of dataset'''
+        return len(self.caption_embeddings)
+    def __getitem__(self, idx):
+        '''return image name, image and embedding for index'''
+        image_id = self.caption_embeddings[idx][0]
+        image_name = f"{image_id}.jpg"
+        image_path = self.image_dataset_path + image_name
+        image = Image.open(image_path).convert('RGB')
+        if self.image_transforms:
+            image = self.image_transforms(image)
+        embedding = torch.from_numpy(self.caption_embeddings[idx][1])
+        return image_name, image, embedding
+
+
+class TestImagesDataset(Dataset):
+    '''PyTorch Dataset for reading test images from pkl file'''
+    def __init__(self, embeddings_file_path, image_dataset_path):
+        with open(embeddings_file_path, 'rb') as file:
+            self.caption_embeddings = list(pickle.load(file).items())
+        self.image_dataset_path = image_dataset_path
+        self.image_transforms = transforms.Compose([
+            transforms.RandomHorizontalFlip(),
+            # transforms.Resize(256), # When crop needs to be more centered
+            transforms.CenterCrop(224), # Try without this too
+            transforms.RandomCrop(224), # ResNet50 input dim is 3x224x224
+            transforms.ToTensor(),
+            transforms.Normalize(
+                mean=[0.485, 0.456, 0.406],
+                std=[0.229, 0.224, 0.225],
+            ) # ImageNet Normalization
+        ])
+    def __len__(self):
+        '''return length of dataset'''
+        return len(self.caption_embeddings)
+    def __getitem__(self, idx):
+        '''return image name and image for index'''
+        image_id = self.caption_embeddings[idx][0]
+        image_name = f"{image_id}.jpg"
+        image_path = self.image_dataset_path + image_name
+        image = Image.open(image_path).convert('RGB')
+        if self.image_transforms:
+            image = self.image_transforms(image)
+        return image_name, image
+
