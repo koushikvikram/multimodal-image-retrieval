@@ -1,4 +1,4 @@
-'''Training and Validation functions'''
+'''Training, Validation and Testing functions'''
 import torch
 
 
@@ -43,6 +43,24 @@ def validate(val_loader, model, criterion):
             print(f"val - epoch: {epoch} \t\t batch: {i+1}/{len(val_loader)} \t\t average batch loss: {loss/len(images)}")
         avg_loss = running_loss/len(val_loader.dataset)
     return avg_loss
+
+
+def encode(test_loader, model):
+    '''get image embeddings from the model'''
+    test_image_embeddings = {}
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    with torch.no_grad():
+        model.to(device)
+        model.eval()
+        for i, (image_names, images) in enumerate(test_loader):
+            print(f"Processing Batch {i}/{len(test_loader)}")
+            images = images.to(device)
+            predictions = model(images)
+            for batch_idx, embedding in enumerate(predictions):
+                image_ID = image_names[batch_idx]
+                embedding = embedding.cpu().detach().numpy()
+                test_image_embeddings[image_ID] = embedding
+    return test_image_embeddings
 
 
 def save_checkpoint(model, filename):
