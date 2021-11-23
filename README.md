@@ -1,6 +1,6 @@
 # Multimodal Image Retrieval
 
-[![Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml)  [![Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml/badge.svg)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml) [![https://share.streamlit.io/koushikvikram/multimodal-image-retrieval/main/app.py]](images/streamlit_badge_black_white.svg)
+[![Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml)  [![Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml/badge.svg)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml) [![Open in Streamlit](images/streamlit_badge_black_white.svg)](https://share.streamlit.io/koushikvikram/multimodal-image-retrieval/main/app.py)
 
 > 🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️ Repo Under Construction 🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️ 
 
