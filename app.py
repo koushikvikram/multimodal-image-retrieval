@@ -44,7 +44,7 @@ def get_closest_image(positive, negative):
     for img_name, distance in similarities.items():
         if similarities[img_name] < min_dist:
             closest_img = img_name
-    image = Image.open(images_dir+closest_img+".jpg")
+    image = Image.open(images_dir+closest_img)
     return image
 
 st.title("Image Retrieval from Text")

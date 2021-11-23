@@ -1,5 +1,5 @@
 tqdm==4.62.3
-# numpy==1.19.5
+numpy
 pandas==1.1.5
 matplotlib==3.2.2
 scikit-learn==1.0.1
