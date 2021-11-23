@@ -2,6 +2,8 @@
 
 [![Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml)  [![Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml/badge.svg)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml) [![Open in Streamlit](images/streamlit_badge_black_white.svg)](https://share.streamlit.io/koushikvikram/multimodal-image-retrieval/main/app.py)
 
+![](images/app-preview.png)
+
 > 🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️ Repo Under Construction 🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️🚦⚠️👷‍♂️🏗️ 
 
 > Note: Our model hasn't been trained sufficiently and the results are nowhere close to our expectations. We'll be improving the model as we find time and more GPU resources. Until then, play around with this (not so great) model.  
