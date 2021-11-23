@@ -21,7 +21,7 @@ Try out the application here: https://share.streamlit.io/koushikvikram/multimoda
 
 ## Project Workflow
 
-![Project Workflow](images/multimodal-image-retrieval-workflow.png)
+![Project Workflow](workflow.png)
 
 ## Dataset
 
