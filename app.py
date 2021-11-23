@@ -5,16 +5,18 @@ import numpy as np
 from gensim.models import Word2Vec
 import streamlit as st
 
+import config.app as cfg
+
 
 # open embeddings for images generated from the CNN
-with open("./application-files/predicted_embeddings.pkl", "rb") as file:
+with open(cfg.EMBEDDINGS_FILE_PATH, "rb") as file:
     embeddings_dict = pickle.load(file)
 
 # images directory
-images_dir = "./application-files/prediction_images/"
+images_dir = cfg.IMAGES_DIR
 
 # load our Word2Vec model
-model = Word2Vec.load("./application-files/word2vec_subset.model")
+model = Word2Vec.load(cfg.WORD2VEC_MODEL)
 
 def get_closest_image(positive, negative):
     # make single vector representation
@@ -41,7 +43,7 @@ def get_closest_image(positive, negative):
     # return closest image
     closest_img = list(similarities.keys())[0]
     min_dist = similarities[closest_img]
-    for img_name, distance in similarities.items():
+    for img_name in similarities:
         if similarities[img_name] < min_dist:
             closest_img = img_name
     image = Image.open(images_dir+closest_img)
@@ -61,20 +63,20 @@ if len(selectbox) == 2:
     operation = st.sidebar.radio(label="Select operation", options=["Add", "Subtract"])
     if operation == "Add":
         sign = "+"
-        positive, negative = selectbox, []
-        message = f"Closest image to '{positive[0]}{sign}{positive[1]}'"
+        positive_inputs, negative_inputs = selectbox, []
+        message = f"Closest image to '{positive_inputs[0]}{sign}{positive_inputs[1]}'"
     elif operation == "Subtract":
         sign = "-"
-        positive, negative = [selectbox[0]], [selectbox[1]]
-        message = f"Closest image to '{positive[0]}{sign}{negative[0]}'"
+        positive_inputs, negative_inputs = [selectbox[0]], [selectbox[1]]
+        message = f"Closest image to '{positive_inputs[0]}{sign}{negative_inputs[0]}'"
 elif len(selectbox) == 1:
-    positive, negative = selectbox, []
-    message = f"Closest image to '{positive[0]}'"
+    positive_inputs, negative_inputs = selectbox, []
+    message = f"Closest image to '{positive_inputs[0]}'"
 
 search = st.sidebar.button("Search")
 
 if search and len(selectbox) <= 2:
-    img = get_closest_image(positive, negative)
+    img = get_closest_image(positive_inputs, negative_inputs)
     st.image(img)
     st.write(message)
 else:

@@ -11,3 +11,4 @@ Pillow==7.1.2
 torch==1.10.0
 --find-links https://download.pytorch.org/whl/cu111/torchvision-0.11.1%2Bcu111-cp37-cp37m-linux_x86_64.whl 
 torchvision==0.11.1
+streamlit==1.2.0
