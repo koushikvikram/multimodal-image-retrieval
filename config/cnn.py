@@ -1,4 +1,6 @@
 '''Configurations for training the CNN'''
+import os
+
 import torch
 import torch.nn as nn
 
@@ -11,3 +13,4 @@ BATCH_SIZE = 96
 EPOCHS = 15
 NUM_WORKERS = 2
 PIN_MEMORY = True
+MODEL_FILE_PATH = os.path.abspath("../model/val_0.006941943121035761.pth.tar")

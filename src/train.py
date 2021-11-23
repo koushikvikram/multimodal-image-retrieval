@@ -20,7 +20,7 @@ def train(train_loader, model, criterion, optimizer):
         # update running_loss for epoch
         running_loss += loss.item()
         # print loss for each batch
-        print(f"train - epoch: {epoch} \t\t batch: {i}/{len(train_loader)} \t\t average batch loss: {loss/len(images)}")
+        print(f"train - epoch: {epoch} \t\t batch: {i+1}/{len(train_loader)} \t\t average batch loss: {loss/len(images)}")
     avg_loss = running_loss/len(train_loader.dataset)
     return avg_loss
 
@@ -40,7 +40,7 @@ def validate(val_loader, model, criterion):
             # update running_loss for epoch
             running_loss += loss.item()
             # print loss for each batch
-            print(f"val - epoch: {epoch} \t\t batch: {i}/{len(val_loader)} \t\t average batch loss: {loss/len(images)}")
+            print(f"val - epoch: {epoch} \t\t batch: {i+1}/{len(val_loader)} \t\t average batch loss: {loss/len(images)}")
         avg_loss = running_loss/len(val_loader.dataset)
     return avg_loss
 
