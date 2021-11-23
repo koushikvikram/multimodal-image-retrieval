@@ -21,7 +21,7 @@ Try out the application here: https://share.streamlit.io/koushikvikram/multimoda
 
 ## Project Workflow
 
-Coming Soon!
+![Project Workflow](images/multimodal-image-retrieval-workflow.png)
 
 ## Dataset
 
@@ -90,7 +90,7 @@ Samples from the Jupyter Notebook:
 
 Articles used as reference during development are documented in the [references](https://github.com/koushikvikram/multimodal-image-retrieval/tree/main/references) directory.
 
-If you run into issues while testing the platform, please create an issue on this GitHub repository at the following link and I'll be glad to fix it: https://github.com/koushikvikram/multimodal-image-retrieval/issues
+If you run into issues while using the repo, please create an issue on this GitHub repository at the following link and I'll be glad to fix it: https://github.com/koushikvikram/multimodal-image-retrieval/issues
 
 If you'd like to collaborate with me or hire me, please feel free to send an email to koushikvikram91@gmail.com
 
