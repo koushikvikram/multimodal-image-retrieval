@@ -208,22 +208,6 @@ def test_split_captions(read_caption_dataset_clean):
         ) == CLEAN_SPLIT_NO_SHUFFLE
 
 
-def test_split_captions_shuffle(read_caption_dataset_clean):
-    '''test if captions data is shuffled and split'''
-    assert read_caption_dataset_clean.get_split(
-        ds_type="captions",
-        train=0.33,
-        val=0.33,
-        test=0.34,
-        ) != read_caption_dataset_clean.get_split(
-            ds_type="captions",
-            train=0.33,
-            val=0.33,
-            test=0.34,
-            shuffle=True
-        )
-
-
 def test_split_captions_only_train(read_caption_dataset_clean):
     '''test if captions data is correctly split'''
     assert read_caption_dataset_clean.get_split(
