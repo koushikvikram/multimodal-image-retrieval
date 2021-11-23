@@ -21,7 +21,7 @@ Try out the application here: https://share.streamlit.io/koushikvikram/multimoda
 
 ## Project Workflow
 
-![Project Workflow](workflow.png)
+![Project Workflow](images/workflow.png)
 
 ## Dataset
 
