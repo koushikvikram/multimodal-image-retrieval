@@ -12,6 +12,7 @@
 > Things we're looking to try:
 > - Improve preprocessing
 >   - Replace special characters with space
+> - Play around with embedding dimensions
 > - Use the entire InstaNY100K Dataset
 > - Train Word2Vec again
 > - Use different CNNs for regressing Word2Vec embeddings from images.
