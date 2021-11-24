@@ -1,6 +1,8 @@
 # Multimodal Image Retrieval
 
 [![Pylint](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pylint.yml)  [![Pytest](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml/badge.svg)](https://github.com/koushikvikram/multimodal-image-retrieval/actions/workflows/pytest.yml) [![Open in Streamlit](images/streamlit_badge_black_white.svg)](https://share.streamlit.io/koushikvikram/multimodal-image-retrieval/main/app.py)
+[![GitHub URL](https://img.shields.io/badge/author-Koushik%20Vikram-brightgreen)](https://github.com/koushikvikram)
+[![LinkedIn URL](https://img.shields.io/badge/-Koushik%20Vikram-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/koushikvikram/)
 
 ![](images/app-preview.png)
 
