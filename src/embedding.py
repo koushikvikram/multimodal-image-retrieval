@@ -6,7 +6,6 @@ from typing import List
 
 import numpy as np
 
-
 MODEL_PATH = os.environ.get('WORD2VEC_MODEL_PATH') + "word2vec.model"
 
 with open(MODEL_PATH, "rb") as file:
