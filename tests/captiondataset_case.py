@@ -137,6 +137,10 @@ CLEAN_EMBEDDINGS_RESULT = {
 
 WORD2VEC_DATASET_RESULT = [
     [
+        'coffee',
+        'coffee',
+    ],
+    [
         'toronto',
         'toronto',
         'montreal',
@@ -144,10 +148,6 @@ WORD2VEC_DATASET_RESULT = [
     [
         'montreal',
     ],
-    [
-        'coffee',
-        'coffee',
-    ]
 ]
 
 CLEAN_SPLIT_NO_SHUFFLE = (
