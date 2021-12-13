@@ -14,7 +14,7 @@ with open(MODEL_PATH, "rb") as file:
 
 
 def compute_embedding(words: List[str]):
-    '''computer and return caption embedding by taking the mean of words
+    '''compute and return caption embedding by taking the mean of words
     and normalizing it'''
     try:
         embedding = np.mean(model[words], axis=0)
