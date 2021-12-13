@@ -152,6 +152,12 @@ WORD2VEC_DATASET_RESULT = [
 
 CLEAN_SPLIT_NO_SHUFFLE = (
     {
+        '000003': [
+            'coffee',
+            'coffee',
+            ]
+    },
+    {
         '000001': [
             'toronto',
             'toronto',
@@ -163,10 +169,4 @@ CLEAN_SPLIT_NO_SHUFFLE = (
             'montreal',
             ]
     },
-    {
-        '000003': [
-            'coffee',
-            'coffee',
-            ]
-    }
 )
