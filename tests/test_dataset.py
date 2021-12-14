@@ -218,22 +218,6 @@ def test_split_captions_only_train(read_caption_dataset_clean):
         )[0] == CLEAN_READ_RESULT
 
 
-# def test_split_embeddings(read_caption_dataset_clean):
-#     '''test if embeddings dataset is correctly split'''
-#     read_caption_dataset_clean.make_caption_embeddings()
-#     embeddings_ds = read_caption_dataset_clean.get_caption_embeddings()
-#     train_ds, val_ds, test_ds = read_caption_dataset_clean.get_split(
-#         ds_type="embeddings",
-#         train=0.33,
-#         val=0.33,
-#         test=0.34,
-#         )
-#     match_train = (train_ds['000001'] == embeddings_ds['000001']).all()
-#     match_val = (val_ds['000002'] == embeddings_ds['000002']).all()
-#     match_test = (test_ds['000003'] == embeddings_ds['000003']).all()
-#     assert match_train and match_val and match_test
-
-
 def test_split_embeddings(read_caption_dataset_clean):
     '''test if embeddings dataset is correctly split'''
     read_caption_dataset_clean.make_caption_embeddings()
